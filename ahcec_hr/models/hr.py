@@ -1,4 +1,4 @@
-    # Part of Odoo. See LICENSE file for full copyright and licensing details.
+# Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import models, fields, api, _
 from datetime import datetime
@@ -17,7 +17,6 @@ class HrEmployee(models.Model):
     _inherit = 'hr.employee'
     _order = "employee_code"
 
-    # @api.multi
     @api.depends('birthday')
     def _get_age(self):
         """
@@ -31,7 +30,6 @@ class HrEmployee(models.Model):
             else:
                 employee.age = 0
 
-    # @api.multi
     @api.constrains('birthday')
     def _check_birthday(self):
         """
@@ -59,8 +57,7 @@ class HrEmployee(models.Model):
                     join_date = datetime.strptime(str(employee.joining_date), DEFAULT_SERVER_DATE_FORMAT).date()
                     to_date = datetime.now().strftime(DEFAULT_SERVER_DATE_FORMAT)
                     current_date = datetime.strptime(to_date, DEFAULT_SERVER_DATE_FORMAT)
-                    employee.duration_in_months = (
-                                                              current_date.year - join_date.year) * 12 + current_date.month - join_date.month
+                    employee.duration_in_months = (current_date.year - join_date.year) * 12 + current_date.month - join_date.month
                 except:
                     employee.duration_in_months = 0.0
             else:
@@ -82,7 +79,6 @@ class HrEmployee(models.Model):
         employee_ids = self.env['hr.employee'].search([('user_id', '=', self.env.uid)])
         return employee_ids[0] if employee_ids else False
 
-    # @api.multi
     # def name_get(self):
     #     result = []
     #     for employee in self:
@@ -159,14 +155,13 @@ class HrEmployee(models.Model):
             self.date_of_leave = False
         return {'warning': warning}
 
-    # @api.one
     def _get_service_year(self):
         """
             Calculate the total no of years, total no of months.
         """
         if self.joining_date and datetime.strptime(str(self.joining_date),
                                                    DEFAULT_SERVER_DATE_FORMAT) < datetime.strptime(
-                str(datetime.today().date().strftime(DEFAULT_SERVER_DATE_FORMAT)), DEFAULT_SERVER_DATE_FORMAT):
+            str(datetime.today().date().strftime(DEFAULT_SERVER_DATE_FORMAT)), DEFAULT_SERVER_DATE_FORMAT):
             if self.date_of_leave:
                 diff = relativedelta(datetime.strptime(str(self.date_of_leave), DEFAULT_SERVER_DATE_FORMAT),
                                      datetime.strptime(str(self.joining_date), DEFAULT_SERVER_DATE_FORMAT))
@@ -177,7 +172,6 @@ class HrEmployee(models.Model):
         else:
             self.total_service_year = "0 Years 0 Months"
 
-    # @api.multi
     @api.depends('name', 'middle_name', 'last_name')
     def name_get(self):
         """
@@ -228,7 +222,6 @@ class HrEmployee(models.Model):
             self.user_id.write({'employee_id': res})
         return res
 
-    # @api.multi
     def write(self, values):
         """
             update a record
@@ -254,11 +247,12 @@ class HrEmployee(models.Model):
         else:
             self.is_saudi = False
 
-# class HrGroupsConfiguration(models.Model):
-#     _inherit = "hr.groups.configuration"
 
-#     branch_id = fields.Many2one('hr.branch', 'Office', required=True, default=lambda self: self.env['hr.branch']._default_branch())
+class HrGroupsConfiguration(models.Model):
+    _inherit = "hr.groups.configuration"
 
-#     _sql_constraints = [
-#         ('unique_branch_id', 'unique(branch_id)', 'Office must be unique per Configuration!'),
-#     ]
+    branch_id = fields.Many2one('hr.branch', 'Office', required=True, default=lambda self: self.env['hr.branch']._default_branch())
+
+    _sql_constraints = [
+        ('unique_branch_id', 'unique(branch_id)', 'Office must be unique per Configuration!'),
+    ]

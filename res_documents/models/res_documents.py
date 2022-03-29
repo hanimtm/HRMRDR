@@ -58,7 +58,6 @@ class ResDocuments(models.Model):
         res.message_subscribe(partner_ids=partner, channel_ids=[channel_id])
         return res
 
-    # @api.multi
     def write(self, vals):
         partner=[]
         if vals.get('manager_id'):
@@ -73,7 +72,6 @@ class ResDocuments(models.Model):
         self.message_subscribe(partner_ids=partner)
         return super(ResDocuments, self).write(vals)
 
-    # @api.multi
     @api.depends('employee_id', 'type_id', 'doc_number')
     def name_get(self):
         """
@@ -117,7 +115,6 @@ class ResDocuments(models.Model):
                         template.send_mail(document.id, force_send=True,raise_exception=False,email_values=None)
         return True
 
-    # @api.multi
     def action_send_mail(self):
         """
             send mail using mail template
@@ -132,21 +129,18 @@ class ResDocuments(models.Model):
             template.send_mail(self.id, force_send=True,raise_exception=False,email_values=None)
         return True
 
-    # @api.multi
     def set_draft(self):
         """
             sent the status of generating Document record in draft state
         """
         self.state = 'draft'
 
-    # @api.multi
     def document_submit(self):
         """
             sent the status of generating Document record in confirm state
         """
         self.state = 'confirm'
 
-    # @api.multi
     def document_issue(self):
         """
             sent the status of generating Document record in issue state and get issue date
@@ -154,14 +148,12 @@ class ResDocuments(models.Model):
         self.action_send_mail()
         return self.write({'state':'issue', 'issue_date': datetime.today()})
 
-    # @api.multi
     def document_refuse(self):
         """
             sent the status of generating Document record in refuse state
         """
         self.state = 'refuse'
 
-    # @api.multi
     def document_renew(self):
         """
             sent the status of generating Document record is renew
@@ -178,7 +170,6 @@ class HrEmployee(models.Model):
     document_ids = fields.One2many('res.documents', 'employee_id', 'Document')
     documents_count = fields.Integer(string='Documents', compute="_compute_documents")
 
-    # @api.multi
     def _compute_documents(self):
         """
             count total document related employee
@@ -187,7 +178,6 @@ class HrEmployee(models.Model):
             documents = self.env['res.documents'].search([('employee_id', '=', employee.id)])
             employee.documents_count = len(documents) if documents else 0
 
-    # @api.multi
     def action_documents(self):
         """
             Show employee Documents

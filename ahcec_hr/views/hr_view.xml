@@ -75,9 +75,9 @@
                     <field name="reference_by" attrs="{'invisible':[('sponsored_by', 'not in', ['other'])], 'required': [('sponsored_by', 'in', ['other'])]}"/>
                 </group>
             </xpath>
-            <!--<xpath expr="//field[@name='company_id']" position="after">
+            <xpath expr="//field[@name='company_id']" position="after">
                 <field name="branch_id" domain="[('company_id', '=', company_id)]" groups="ahcec_hr_branch.group_company_branch"/>
-            </xpath>-->
+            </xpath>
             <xpath expr="//field[@name='work_phone']" position="after">
                 <field name="branch_id"  groups="ahcec_hr_branch.group_company_branch"/>
                 <field name="laptop_desktop"/>

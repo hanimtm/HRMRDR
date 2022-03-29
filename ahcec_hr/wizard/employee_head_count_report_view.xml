@@ -28,7 +28,6 @@
     <record id="action_employee_reports_form" model="ir.actions.act_window">
         <field name="name">Employee Reports</field>
         <field name="res_model">employee.head.count</field>
-<!--        <field name="view_type">form</field>-->
         <field name="view_mode">form</field>
         <field name="target">new</field>
         <field name="view_id" ref="employee_reports_print_view"/>

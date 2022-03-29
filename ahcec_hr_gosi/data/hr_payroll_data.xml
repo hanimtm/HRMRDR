@@ -54,46 +54,46 @@
         </record>
 
         <!-- House Rent Allowance-->
-<!--        <record id="hr_salary_rule_houserentallowance" model="hr.salary.rule">-->
-<!--            <field name="amount_select">percentage</field>-->
-<!--            <field eval="25.0" name="amount_percentage"/>-->
-<!--            <field name="amount_percentage_base">contract.HRA</field>-->
-<!--            <field name="code">HRA</field>-->
-<!--            <field name="category_id" ref="HRA"/>-->
-<!--            <field name="register_id" ref="contrib_hr_houserent_register"/>-->
-<!--            <field name="name">House Rent Allowance</field>-->
-<!--            <field name="sequence" eval="5"/>-->
-<!--        </record>-->
-<!--        <record id="hr_salary_rule_houserentallowance" model="hr.salary.rule">-->
-<!--            <field name="code">House Rent Allowance</field>-->
-<!--            <field name="amount_select">code</field>-->
-<!--            <field name="amount_python_compute">result=(contract.HRA)</field>-->
-<!--            <field name="category_id" ref="HRA"/>-->
-<!--            <field name="register_id" ref="contrib_hr_houserent_register"/>-->
-<!--            <field name="category_id" ref="hr_payroll.ALW"/>-->
-<!--            <field name="name">Allowances</field>-->
-<!--            <field name="sequence" eval="5"/>-->
-<!--        </record>-->
-<!--        <record id="hr_salary_rule_sd_allowance" model="hr.salary.rule">-->
-<!--            <field name="code">C &amp; SD Allowance</field>-->
-<!--            <field name="amount_select">code</field>-->
-<!--            <field name="amount_python_compute">result=(contract.cda)</field>-->
-<!--            <field name="category_id" ref="HRA"/>-->
-<!--            <field name="register_id" ref="contrib_c_sd_register"/>-->
-<!--            <field name="category_id" ref="hr_payroll.ALW"/>-->
-<!--            <field name="name">Allowances</field>-->
-<!--            <field name="sequence" eval="5"/>-->
-<!--        </record>-->
-<!--         <record id="hr_salary_rule_mobile_allowance" model="hr.salary.rule">-->
-<!--            <field name="code">Mobile Allowance</field>-->
-<!--            <field name="amount_select">code</field>-->
-<!--            <field name="amount_python_compute">result=(contract.mobile)</field>-->
-<!--            <field name="category_id" ref="HRA"/>-->
-<!--            <field name="register_id" ref="contrib_hr_houserent_register"/>-->
-<!--            <field name="category_id" ref="hr_payroll.ALW"/>-->
-<!--            <field name="name">Allowances</field>-->
-<!--            <field name="sequence" eval="5"/>-->
-<!--        </record>-->
+        <record id="hr_salary_rule_houserentallowance" model="hr.salary.rule">
+            <field name="amount_select">percentage</field>
+            <field eval="25.0" name="amount_percentage"/>
+            <field name="amount_percentage_base">contract.HRA</field>
+            <field name="code">HRA</field>
+            <field name="category_id" ref="HRA"/>
+            <field name="register_id" ref="contrib_hr_houserent_register"/>
+            <field name="name">House Rent Allowance</field>
+            <field name="sequence" eval="5"/>
+        </record>
+        <record id="hr_salary_rule_houserentallowance" model="hr.salary.rule">
+            <field name="code">House Rent Allowance</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=(contract.HRA)</field>
+            <field name="category_id" ref="HRA"/>
+            <field name="register_id" ref="contrib_hr_houserent_register"/>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="name">Allowances</field>
+            <field name="sequence" eval="5"/>
+        </record>
+        <record id="hr_salary_rule_sd_allowance" model="hr.salary.rule">
+            <field name="code">C &amp; SD Allowance</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=(contract.cda)</field>
+            <field name="category_id" ref="HRA"/>
+            <field name="register_id" ref="contrib_c_sd_register"/>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="name">Allowances</field>
+            <field name="sequence" eval="5"/>
+        </record>
+         <record id="hr_salary_rule_mobile_allowance" model="hr.salary.rule">
+            <field name="code">Mobile Allowance</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result=(contract.mobile)</field>
+            <field name="category_id" ref="HRA"/>
+            <field name="register_id" ref="contrib_hr_houserent_register"/>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="name">Allowances</field>
+            <field name="sequence" eval="5"/>
+        </record>
 
         <!-- GOSI Deduction-->
         <record id="hr_salary_rule_gosi_emp_deduction_sa" model="hr.salary.rule">

@@ -11,7 +11,6 @@ class AccrualWizard(models.TransientModel):
     date_from = fields.Date('From', required=True)
     date_to = fields.Date('To', required=True)
 
-    # @api.multi
     @api.onchange('date_from')
     def onchange_date_from(self):
         if self.date_from:
@@ -22,7 +21,6 @@ class AccrualWizard(models.TransientModel):
             self.date_from = sdate
             self.date_to = edate
 
-    # @api.multi
     @api.onchange('date_to')
     def onchange_date_to(self):
         if self.date_from:
@@ -45,7 +43,6 @@ class AccrualWizard(models.TransientModel):
         data = self.env.cr.dictfetchall()
         return data
 
-    # @api.multi
     def hr_accrual_entry(self):
         for employee in self.env['hr.employee'].search([('active', '=', True)]):
             contracts = employee.get_active_contracts(date=self.date_to)

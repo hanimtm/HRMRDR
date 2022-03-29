@@ -28,7 +28,6 @@ class YearYear(models.Model):
         ('code_uniq', 'unique(code)', 'Code must be unique!'),
     ]
 
-    # @api.one
     @api.constrains('date_start', 'date_stop')
     def check_date_from_to(self):
         """
@@ -41,7 +40,7 @@ class YearYear(models.Model):
         if nworking:
             raise ValidationError(_('You can not have calendar year that overlaps on same year!'))
 
-    # @api.multi
+
     def find(self, dt=None, exception=True, previous=False):
         """
             Find the record depends on Date
@@ -49,7 +48,6 @@ class YearYear(models.Model):
         res = self.finds(dt, exception, previous)
         return res and res[0]
 
-    # @api.multi
     def finds(self, dt=None, exception=True, previous=False):
         """
             parameters: dt = Date, exception = 'True' or 'False'
@@ -72,7 +70,6 @@ class YearYear(models.Model):
                 return []
         return ids
 
-    # @api.multi
     def create_period(self):
         """
             create a new record for Year Period object

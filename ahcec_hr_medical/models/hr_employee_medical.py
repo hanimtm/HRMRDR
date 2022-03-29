@@ -33,7 +33,6 @@ class InsuranceDetails(models.Model):
     _order = 'id desc'
     _description = 'Employee Medical Insurance'
 
-    # @api.multi
     @api.depends('employee_id')
     def _get_employee_vals(self):
         for insurance in self:
@@ -51,7 +50,6 @@ class InsuranceDetails(models.Model):
             if insurance.employee_id.user_id:
                 insurance.message_subscribe_users(user_ids=insurance.employee_id.user_id.id)
 
-    # @api.multi
     def _count_claim(self):
         """
             count the number of claims
@@ -99,7 +97,6 @@ class InsuranceDetails(models.Model):
     dependent_ids = fields.One2many('insurance.employee.dependent', 'insurance_id', string='Dependents')
     is_invoice_created = fields.Boolean('Invoice Created', readonly=True)
 
-    # @api.multi
     @api.constrains('insurance_amount', 'premium_amount')
     def check_premium_amount(self):
         """
@@ -117,7 +114,6 @@ class InsuranceDetails(models.Model):
             res._add_followers()
         return res
 
-    # @api.multi
     def write(self, values):
         res = super(InsuranceDetails, self).write(values)
         if values.get('employee_id'):
@@ -135,7 +131,6 @@ class InsuranceDetails(models.Model):
                 days = abs(end - start).days + 1
                 insurance.premium_amount = insurance.insurance_amount / days
 
-    # @api.multi
     def create_invoice(self):
         """
             Create Invoice for Premium Amount
@@ -187,12 +182,10 @@ class InsuranceDetails(models.Model):
         if self.company_id:
             self.currency_id = self.company_id.currency_id and self.company_id.currency_id.id or False
 
-    # @api.multi
     # @api.onchange('premium_type', 'start_date', 'end_date', 'insurance_amount')
     # def onchange_premium(self):
     #     self.generate_premiums()
     #     return True
-    # @api.multi
     def generate_premiums(self):
         self.ensure_one()
         for insurance in self:
@@ -237,7 +230,6 @@ class InsuranceDetails(models.Model):
                 final_list = [(0, 0, line) for line in premium_list]
                 insurance.premium_ids = final_list
 
-    # @api.multi
     def action_cancelled(self):
         """
             set insurance status as 'cancelled'
@@ -245,7 +237,6 @@ class InsuranceDetails(models.Model):
         self.ensure_one()
         self.state = 'cancelled'
 
-    # @api.multi
     def action_confirm(self):
         """
             set insurance status as 'confirmed'
@@ -254,7 +245,6 @@ class InsuranceDetails(models.Model):
         self.state = 'confirmed'
         self.generate_premiums()
 
-    # @api.multi
     def action_done(self):
         """
             set insurance status as 'done'
@@ -262,7 +252,6 @@ class InsuranceDetails(models.Model):
         self.ensure_one()
         self.state = 'done'
 
-    # @api.multi
     def action_set_to_draft(self):
         """
             set insurance status as 'draft'
@@ -270,7 +259,6 @@ class InsuranceDetails(models.Model):
         self.ensure_one()
         self.state = 'draft'
 
-    # @api.multi
     def view_insurance(self):
         """
            Redirect On Employee Insurance Form
@@ -281,7 +269,6 @@ class InsuranceDetails(models.Model):
             'type': 'ir.actions.act_window',
             'name': _('Insurance'),
             'res_model': 'insurance.details',
-            'view_type': 'form',
             'view_mode': 'from',
             'views': [(form_view.id, 'form')],
             'res_id': self.id,
@@ -290,7 +277,6 @@ class InsuranceDetails(models.Model):
             'editable': False,
         }
 
-    # @api.multi
     def view_claims(self):
         """
            Redirect On Insurance Claim
@@ -303,7 +289,6 @@ class InsuranceDetails(models.Model):
                 'type': 'ir.actions.act_window',
                 'name': _('Claims'),
                 'res_model': 'claim.details',
-                'view_type': 'form',
                 'view_mode': 'form',
                 'views': [(tree_view.id, 'tree'), (form_view.id, 'form')],
                 'domain': [('id', 'in', self.claims_ids.ids)],
@@ -336,29 +321,24 @@ class InsurancePremium(models.Model):
     # invoice_id = fields.Many2one('account.invoice', string="Invoice")
     move_id = fields.Many2one('account.move', string="Move ID")
 
-    # @api.multi
     def view_invoice_action(self):
         return {
             'type': 'ir.actions.act_window',
-            'view_type': 'form',
             'view_mode': 'form',
             'res_model': 'account.invoice',
             'views': [(self.env.ref('account.invoice_supplier_form').id, 'form')],
             'res_id': self.invoice_id.id
         }
 
-    # @api.multi
     def print_invoice(self):
         return self.env.ref('account.account_invoices').report_action(self.invoice_id)
 
-    # @api.multi
     def action_move_create(self):
         premiums = self.search([('insurance_id.state', '=', 'confirmed'), ('is_move_created', '=', False),
                                 ('date', '=', fields.date.today())])
         for premium in premiums:
             premium.create_move()
 
-    # @api.multi
     # def create_move(self):
     #     for rec in self:
     #         line_ids = []
@@ -439,7 +419,6 @@ class ClaimDetails(models.Model):
             res._add_followers()
         return res
 
-    # @api.multi
     def write(self, values):
         res = super(ClaimDetails, self).write(values)
         if values.get('employee_id'):
@@ -465,7 +444,6 @@ class ClaimDetails(models.Model):
         if self.company_id:
             self.currency_id = self.company_id.sudo().currency_id and self.company_id.currency_id.id or False
 
-    # @api.multi
     def action_confirm(self):
         """
             set claim status as 'confirm'
@@ -473,7 +451,6 @@ class ClaimDetails(models.Model):
         self.ensure_one()
         self.state = 'confirm'
 
-    # @api.multi
     def action_refuse(self):
         """
             set claim status as 'refuse'
@@ -481,7 +458,6 @@ class ClaimDetails(models.Model):
         self.ensure_one()
         self.state = 'refuse'
 
-    # @api.multi
     def action_cancel(self):
         """
             set claim status as 'cancel'
@@ -489,7 +465,6 @@ class ClaimDetails(models.Model):
         self.ensure_one()
         self.state = 'cancel'
 
-    # @api.multi
     def action_done(self):
         """
             set claim status as 'done'
@@ -500,7 +475,6 @@ class ClaimDetails(models.Model):
         else:
             self.state = 'done'
 
-    # @api.multi
     def action_set_to_draft(self):
         """
             set claim status as 'draft'
@@ -513,7 +487,6 @@ class InsuranceEmployeeDependent(models.Model):
     _name = 'insurance.employee.dependent'
     _description = 'Employee dependent insurance information'
 
-    # @api.multi
     @api.depends('name')
     def _get_employee_value(self):
         for insurance in self:

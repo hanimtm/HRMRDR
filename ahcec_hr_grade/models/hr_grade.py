@@ -32,7 +32,6 @@ class HrJob(models.Model):
 
     grade_id = fields.Many2one('hr.grade', string='Grade')
 
-    # @api.multi
     @api.depends('name', 'grade_id')
     def name_get(self):
         """

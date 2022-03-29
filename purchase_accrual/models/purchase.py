@@ -19,7 +19,6 @@ class PurchaseOrderLine(models.Model):
 class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
-    # @api.one
     @api.depends('order_line.manual_complete')
     def _get_product_data(self):
         ct = 0
@@ -32,7 +31,6 @@ class PurchaseOrder(models.Model):
         else:
             self.is_rev_pending = True
 
-    # @api.one
     @api.depends('move_id','purchase_type')
     def _get_accrual_data(self):
         ct = 0
@@ -47,7 +45,6 @@ class PurchaseOrder(models.Model):
     is_accrual_move_pending = fields.Boolean('Is Accrual Move Pending',compute='_get_accrual_data',store=True)
     purchase_type = fields.Selection([('normal', 'Create Accrual Entry'), ('asset', 'No need Accrual Entry')],required=True)
 
-    # @api.multi
     def done_purchase_fun(self):
         for rec in self:
             if rec.purchase_type == 'normal':
@@ -101,7 +98,6 @@ class PurchaseOrder(models.Model):
 
             return True
     
-    # @api.multi
     def create_accrual(self):
         for rec in self:
                 line_ids = []
@@ -146,7 +142,6 @@ class PurchaseOrder(models.Model):
                     move_id = self.env['account.move'].create(move)
                     rec.write({'move_id': move_id.id})
 
-    # @api.multi
     # def button_approve(self):
     #     result = super(PurchaseOrder, self).button_approve()
     #     raise UserError(_('TEST'))
@@ -155,7 +150,6 @@ class PurchaseOrder(models.Model):
         
     #     return result
 
-    # @api.multi
     def _create_picking(self):
         result = super(PurchaseOrder, self)._create_picking()
         self.create_accrual()
@@ -173,7 +167,6 @@ class StockPicking(models.Model):
 
     accrual_move_id = fields.Many2one('account.move', 'Accrual Move')
 
-    # @api.multi
     def action_done(self):
         result = super(StockPicking, self).action_done()
         if result:

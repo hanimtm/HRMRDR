@@ -11,7 +11,6 @@ class EmployeeReports(models.TransientModel):
     job_ids = fields.Many2many('hr.job', string='Job')
     manager_ids = fields.Many2many('hr.employee', string='Manager',)
 
-    # @api.multi
     def print_reports(self):
         self.ensure_one()
         return self.env.ref('ahcec_hr.action_report_hr_employee').report_action(self)
@@ -22,7 +21,6 @@ class EmployeeReports(models.TransientModel):
         self.job_ids = False
         self.manager_ids = False
 
-    # @api.multi
     def get_dept(self):
         data = []
         if self.based_on == 'Department':
@@ -48,7 +46,6 @@ class EmployeeReports(models.TransientModel):
                 data.append(manager.name)
         return data
 
-    # @api.multi
     def get_emp(self, data_id):
         emp = []
         if self.based_on == 'Department':

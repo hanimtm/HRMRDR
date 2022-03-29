@@ -66,13 +66,13 @@
         </field>
     </record>
 
-<!--    <record id="hr_gosi_filter" model="ir.ui.view">-->
+<!--    <record id="hr_gosi_filter_search" model="ir.ui.view">-->
 <!--         <field name="name">hr.gosi.select.list</field>-->
 <!--         <field name="model">employee.gosi</field>-->
 <!--         <field name="arch" type="xml">-->
-<!--             <search>-->
-<!--                 <field name="employee_id"/>-->
-<!--                 <group expand="0" string="Group By...">-->
+<!--             <search string="Group By...">-->
+<!--&lt;!&ndash;                 <field name="employee_id"/>&ndash;&gt;-->
+<!--                 <group expand="0" >-->
 <!--                     <filter string="Type" context="{'group_by':'region_type'}"/>-->
 <!--                     <filter string="Employee" context="{'group_by':'employee_id'}"/>-->
 <!--                     <filter string="Department" context="{'group_by':'department_id'}"/>-->

@@ -21,7 +21,7 @@
 <!--        <field name="appears_on_payslip">False</field>-->
 <!--        <field name="condition_select">python</field>-->
 <!--        <field name="condition_python">result = contract.HRA</field>-->
-<!--        <field name="register_id" ref="ahcec_hr_gosi.contrib_hr_houserent_register"/>-->
+<!--&lt;!&ndash;        <field name="register_id" ref="ahcec_hr_gosi.contrib_hr_houserent_register"/>&ndash;&gt;-->
 <!--        <field name="sequence" eval="2"/>-->
 <!--        <field name="amount_select">fix</field>-->
 <!--    </record>-->

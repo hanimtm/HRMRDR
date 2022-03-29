@@ -9,7 +9,8 @@
     'category': 'HR',
     'version': '1.5',
     'sequence': 20,
-    'depends': ['account', 'ahcec_hr_grade', 'hr_contract', 'hr_payroll', 'purchase_accrual', 'ahcec_hr_medical'],
+    'depends': ['account', 'ahcec_hr_grade', 'hr_contract', 'hr_payroll', 'purchase_accrual', 'ahcec_hr_medical',
+                'ahcec_hr_gosi'],
     'data': [
         'security/ir.model.access.csv',
         'security/ir_rule.xml',

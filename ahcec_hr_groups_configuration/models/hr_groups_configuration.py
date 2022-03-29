@@ -11,17 +11,17 @@ class HrGroupsConfiguration(models.Model):
     # Fields Hr Groups Configuration
 
     branch_id = fields.Many2one('hr.branch', 'Office', required=True)
-    helpdesk_ids = fields.Many2many('hr.employee',
-                                    'employee_helpdesk_rel',
-                                    'helpdesk_id',
-                                    'employee_id',
-                                    string='Helpdesks')
-    talent_acquisition_ids = fields.Many2many('hr.employee', 'employee_talent_rel', 'talent_acqui_id', 'employee_id', string='Talent Acquisitions')
+    helpdesk_ids = fields.Many2many('hr.employee', 'employee_helpdesk_rel',
+                                    'helpdesk_id', 'employee_id', string='Helpdesks')
+    talent_acquisition_ids = fields.Many2many('hr.employee', 'employee_talent_rel', 'talent_acqui_id', 'employee_id',
+                                              string='Talent Acquisitions')
     gr_ids = fields.Many2many('hr.employee', 'employee_gr_rel', 'gr_id', 'employee_id', string='GRs')
     hr_ids = fields.Many2many('hr.employee', 'employee_hr_rel', 'hr_id', 'employee_id', string='HRs')
-    finance_ids = fields.Many2many('hr.employee', 'employee_finance_rel', 'finance_id', 'employee_id', string='Finances')
+    finance_ids = fields.Many2many('hr.employee', 'employee_finance_rel', 'finance_id', 'employee_id',
+                                   string='Finances')
     admin_ids = fields.Many2many('hr.employee', 'employee_admin_rel', 'admin_id', 'employee_id', string='Admins')
-    payroll_ids = fields.Many2many('hr.employee', 'employee_payroll_rel', 'payroll_id', 'employee_id', string='Payrolls')
+    payroll_ids = fields.Many2many('hr.employee', 'employee_payroll_rel', 'payroll_id', 'employee_id',
+                                   string='Payrolls')
     driver_ids = fields.Many2many('hr.employee', 'employee_driver_rel', 'driver_id', 'employee_id', string='Drivers')
     hop_ids = fields.Many2many('hr.employee', 'employee_hop_rel', 'hop_id', 'employee_id', string='HoPs')
 

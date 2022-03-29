@@ -3,7 +3,8 @@
     <data noupdate="1">
 
         <!-- Scheduler for Contract -->
-        <record forcecreate="True" id="ir_cron_contract_scheduler_action" model="ir.cron">
+        <record forcecreate="True" id="ir_cron_contract_scheduler_action"
+                model="ir.cron">
             <field name="name">Scheduled Contract Expiration</field>
             <field name="user_id" ref="base.user_root"/>
             <field name="interval_number">1</field>

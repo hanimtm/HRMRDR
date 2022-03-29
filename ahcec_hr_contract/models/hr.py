@@ -9,7 +9,6 @@ import calendar
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
 
-    # @api.multi
     def get_active_contracts(self, date=fields.Date.today()):
         active_contract_ids = self.env['hr.contract'].search([
             '&',

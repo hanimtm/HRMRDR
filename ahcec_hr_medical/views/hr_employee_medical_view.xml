@@ -97,23 +97,23 @@
                                 </field>
                             </group>
                         </page>
-<!--                        <page string="Insurance Premium">-->
-<!--                            <group>-->
-<!--                                <field name="premium_ids" nolabel="1" attrs="{'readonly':[('state','!=','draft')]}">-->
-<!--                                    <tree string="Insurance Premium" editable='bottom'>-->
-<!--                                        <field name="sequence"/>-->
-<!--                                        <field name="date"/>-->
-<!--                                        <field name="amount"/>-->
-<!--                                        <field name="is_move_created"/>-->
-<!--                                        <field name="move_id"/>-->
-<!--&lt;!&ndash;                                        <button name="create_invoice" type="object" string="Create Invoice" class="oe_highlight"&ndash;&gt;-->
-<!--&lt;!&ndash;                                        attrs="{'invisible': [('is_invoice_created','=', True)]}" groups="hr.group_hr_user"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <button name="view_invoice_action" type="object" string="View Invoice"  attrs="{'invisible': [('is_invoice_created','=',False)]}" class="oe_stat_button" icon="fa-pencil-square-o" groups="hr.group_hr_user"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <button name="print_invoice" type="object" string="Print Invoice" attrs="{'invisible': [('is_invoice_created','=',False)]}" icon="fa fa-print" groups="hr.group_hr_user"/>&ndash;&gt;-->
-<!--                                    </tree>-->
-<!--                                </field>-->
-<!--                            </group>-->
-<!--                        </page>-->
+                        <page string="Insurance Premium">
+                            <group>
+                                <field name="premium_ids" nolabel="1" attrs="{'readonly':[('state','!=','draft')]}">
+                                    <tree string="Insurance Premium" editable='bottom'>
+                                        <field name="sequence"/>
+                                        <field name="date"/>
+                                        <field name="amount"/>
+                                        <field name="is_move_created"/>
+                                        <field name="move_id"/>
+<!--                                        <button name="create_invoice" type="object" string="Create Invoice" class="oe_highlight"-->
+<!--                                        attrs="{'invisible': [('is_invoice_created','=', True)]}" groups="hr.group_hr_user"/>-->
+<!--                                        <button name="view_invoice_action" type="object" string="View Invoice"  attrs="{'invisible': [('is_invoice_created','=',False)]}" class="oe_stat_button" icon="fa-pencil-square-o" groups="hr.group_hr_user"/>-->
+<!--                                        <button name="print_invoice" type="object" string="Print Invoice" attrs="{'invisible': [('is_invoice_created','=',False)]}" icon="fa fa-print" groups="hr.group_hr_user"/>-->
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
                         <page string="Description">
                             <group>
                                 <field name="note" nolabel="1" attrs="{'readonly':[('state','!=','draft')]}"/>
@@ -148,7 +148,6 @@
     <record id="action_insurance_details_view" model="ir.actions.act_window">
         <field name="name">Insurance Details</field>
         <field name="res_model">insurance.details</field>
-<!--        <field name="view_type">form</field>-->
         <field name="view_mode">tree,form</field>
     </record>
 
@@ -243,7 +242,6 @@
     <record id="action_claims_details_view" model="ir.actions.act_window">
         <field name="name">Claims Details</field>
         <field name="res_model">claim.details</field>
-<!--        <field name="view_type">form</field>-->
         <field name="view_mode">tree,form</field>
     </record>
 

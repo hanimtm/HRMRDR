@@ -19,7 +19,7 @@
         <field name="name">hr.contract.view.inherit.overtime.form1</field>
         <field name="model">hr.contract</field>
         <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
-<!--        <field name="priority" eval="8"/>-->
+        <!--        <field name="priority" eval="8"/>-->
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="replace">
                 <notebook>
@@ -55,7 +55,7 @@
                             <field name="other_allow"
                                    attrs="{'invisible': [('is_other_allow','!=',True)], 'required': [('is_other_allow','=',True)]}"/>
 
-<!--                            <field name="advantages" nolabel="1" placeholder="Advantages..." colspan="2"/>-->
+                            <!--                            <field name="advantages" nolabel="1" placeholder="Advantages..." colspan="2"/>-->
                         </group>
                         <group name="Total" string="Total" col="4">
                             <field name="total_salary"/>
@@ -158,19 +158,20 @@
         </field>
     </record>
 
-<!--    <record id="hr_contract_view_search" model="ir.ui.view">-->
-<!--        <field name="name">hr.contract.view.search</field>-->
-<!--        <field name="model">hr.contract</field>-->
-<!--        <field name="inherit_id" ref="hr_contract.hr_contract_view_search"/>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <search string="Search Contract">-->
-<!--                <field name="employee_id"/>-->
-<!--                <filter string="Saudi" domain="[('employee_id.is_saudi','=','True')]"/>-->
-<!--                <filter string="Non-Saudi" domain="[('employee_id.is_saudi','!=','True')]"/>-->
-<!--                <filter string="To be Renew" icon="terp-go-today" domain="[('state','=','pending')]"/>-->
-<!--            </search>-->
-<!--        </field>-->
-<!--    </record>-->
+
+    <record id="hr_contract_view_search" model="ir.ui.view">
+        <field name="name">hr.contract.view.search</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='running']" position="before">
+                <filter string="Saudi" name="is_saudi"
+                        domain="[('employee_id.is_saudi','=','True')]"/>
+                <filter string="Non-Saudi" name="is_saudi" domain="[('employee_id.is_saudi','!=','True')]"/>
+                <filter string="To be Renew" icon="terp-go-today" name="state" domain="[('state','=','pending')]"/>
+            </xpath>
+        </field>
+    </record>
 
     <!-- Contract View -->
     <record id="hr_contract_view_tree" model="ir.ui.view">
@@ -178,11 +179,11 @@
         <field name="model">hr.contract</field>
         <field name="inherit_id" ref="hr_contract.hr_contract_view_tree"/>
         <field name="arch" type="xml">
-<!--            <xpath expr="//tree" position="attributes">-->
-<!--                <attribute name="colors">-->
-<!--                    {red:state=='close';blue:state=='pending';gray:state=='draft';green:state=='open';}-->
-<!--                </attribute>-->
-<!--            </xpath>-->
+            <!--            <xpath expr="//tree" position="attributes">-->
+            <!--                <attribute name="colors">-->
+            <!--                    {red:state=='close';blue:state=='pending';gray:state=='draft';green:state=='open';}-->
+            <!--                </attribute>-->
+            <!--            </xpath>-->
             <xpath expr="//field[@name='employee_id']" position="after">
                 <!-- <field name="notify_date" invisible="1"/> -->
                 <field name="state" invisible="1"/>

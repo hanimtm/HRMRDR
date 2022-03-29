@@ -30,7 +30,6 @@ class NewJoiningEmployeeReports(models.TransientModel):
         ('date_check', "CHECK((start_date <= end_date))", "Please enter valid date")
     ]
 
-    # @api.multi
     def print_reports(self):
         data = self.read()[0]
         return self.env.ref('ahcec_hr.action_report_joining_employee').report_action(self, data=data)

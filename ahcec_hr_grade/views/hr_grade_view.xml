@@ -16,8 +16,8 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_filter"/>
         <field name="arch" type="xml">
-            <xpath expr="//filter[last()]" position="before">
-<!--                <filter string="Grade" context="{'group_by':'grade_id'}"/>-->
+            <xpath expr="//filter[@name='group_job']" position="after">
+                <!--                <filter string="Grade" context="{'group_by':'grade_id'}"/>-->
             </xpath>
         </field>
     </record>
@@ -46,7 +46,7 @@
                         <separator string="JOB"/>
                         <field name="hr_job_ids" widget="many2many" nolabel="1" colspan="4">
                             <field name="name"/>
-                            <!--                            <field name="department_id"/>-->
+<!--                            <field name="department_id"/>-->
                         </field>
                     </group>
                 </sheet>
@@ -70,7 +70,6 @@
     <record model="ir.actions.act_window" id="action_hr_grade">
         <field name="name">Grade</field>
         <field name="res_model">hr.grade</field>
-        <!--        <field name="view_type">form</field>-->
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">Click to define a new Grade.</p>

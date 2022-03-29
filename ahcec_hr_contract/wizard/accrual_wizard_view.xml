@@ -32,7 +32,6 @@
 <!--        <record id="open_accrual_wizard_action" model="ir.actions.act_window">-->
 <!--            <field name="name">Generate Accruals</field>-->
 <!--            <field name="res_model">accrual.wizard</field>-->
-<!--&lt;!&ndash;            <field name="view_type">form</field>&ndash;&gt;-->
 <!--            <field name="view_mode">form</field>-->
 <!--            <field name="target">new</field>-->
 <!--            <field name="view_id" ref="view_accrual_wizard_form"/>-->

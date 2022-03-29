@@ -91,7 +91,6 @@ class HRContract(models.Model):
             #         raise UserError(_('Please close the active contracts of %s') % employee.name)
         return super(HRContract, self).create(values)
 
-    # @api.multi
     def write(self, values):
         """
             update an existing record
@@ -101,7 +100,6 @@ class HRContract(models.Model):
             values.update({'job_id': employee.job_id.id or False})
         return super(HRContract, self).write(values)
 
-    # @api.one
     # @api.depends('date_end')
     # def _get_notify_date(self):
     #     self.notify_date = False
@@ -109,7 +107,6 @@ class HRContract(models.Model):
     #         date_end = fields.Datetime.from_string(self.date_end)
     #         self.notify_date = date_end - relativedelta(months=+2)
 
-    # @api.multi
     @api.depends('total_salary', 'insurance_cost', 'eos_amount', 'vacation', 'mobilization_fee',
                  'residency_cost', 'signon_bonus_amount')
     def _get_cost(self):
@@ -121,7 +118,6 @@ class HRContract(models.Model):
             contract.total_monthly_cost = contract.monthly_indirect_cost + contract.total_salary
             contract.total_yearly_cost = contract.total_monthly_cost * 12
 
-    # @api.multi
     @api.depends('wage', 'mobile_allowance', 'signon_bonus_amount', 'HRA', 'TA', 'cda', 'other_allow', 'shift_allow',
                  'remote_allow')
     def _get_total(self):
@@ -135,7 +131,6 @@ class HRContract(models.Model):
                                     contract.shift_allow + \
                                     contract.remote_allow
 
-    # @api.multi
     @api.depends('is_vacation', 'total_salary')
     def _get_vacation(self):
         for contract in self:
@@ -144,7 +139,6 @@ class HRContract(models.Model):
             else:
                 contract.vacation = 0
 
-    # @api.multi
     @api.depends('wage', 'HRA')
     def _get_gosi(self):
         for contract in self:
@@ -174,7 +168,6 @@ class HRContract(models.Model):
             contract.gosi_total_pay = contract.gosi_employee_pay + contract.gosi_company_pay
 
     # s #         contract.gosi_company_pay_manual = contract.gosi_company_pay
-    # @api.multi
     @api.depends()
     def _get_eos(self):
         for contract in self:
@@ -211,7 +204,6 @@ class HRContract(models.Model):
                     contract.eos_amount = (1825 * (contract.total_salary / 2) / 365) + (
                             ((days - 1825) * contract.total_salary) / 365)
 
-    # @api.multi
     @api.depends('wage')
     def _get_amount(self):
         for contract in self:

@@ -23,15 +23,15 @@ class HrPayslip(models.Model):
                               states={'draft': [('readonly', False)]})
     include_gosi = fields.Boolean(compute='_include_gosi', string='Include GOSI in Payslip')
 
-    @api.onchange('employee_id', 'date_from', 'date_to')
-    def onchange_employee(self):
-        """
-            onchange details of employee based on selecting gosi_id.
-        """
-        res = super(HrPayslip, self).onchange_employee()
-        if self.employee_id:
-            self.gosi_id = self.employee_id.gosi_ids.id
-        return res
+    # @api.onchange('employee_id', 'date_from', 'date_to')
+    # def onchange_employee(self):
+    #     """
+    #         onchange details of employee based on selecting gosi_id.
+    #     """
+    #     res = super(HrPayslip, self).onchange_employee()
+    #     if self.employee_id:
+    #         self.gosi_id = self.employee_id.gosi_ids.id
+    #     return res
 
     def action_payslip_done(self):
         """

@@ -46,7 +46,7 @@ class HrEmployee(models.Model):
     dependent_ids = fields.One2many('employee.dependent', 'employee_id', string='Dependents')
     dependent_count = fields.Integer(string='Dependents', compute='_compute_dependents')
 
-    # @api.multi
+
     def _compute_dependents(self):
         '''
             count dependents related employee
@@ -55,7 +55,6 @@ class HrEmployee(models.Model):
             dependents = self.env['employee.dependent'].search([('employee_id', '=', employee.id)])
             employee.dependent_count = len(dependents) if dependents else 0
 
-    # @api.multi
     def action_dependents(self):
         """
             Show employee Dependents
