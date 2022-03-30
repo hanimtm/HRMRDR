@@ -12,15 +12,15 @@
 <!--        <field name="active" eval="False"/>-->
 <!--    </record>-->
 
-    <record model="ir.ui.view" id="leaves_adjustment_view">
+    <record model="ir.ui.view" id="id_leaves_adjustment_view">
         <field name="name">Leaves Adjustment</field>
         <field name="model">leaves.adjustment</field>
         <field name="inherit_id" ref="ahcec_hr_leaves_management.leaves_adjustment_view"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='count']" position="before">
-                <field name="day_from"/>
-                <field name="day_end"/>
-            </xpath>
+<!--            <xpath expr="//field[@name='count']" position="before">-->
+<!--                <field name="day_from"/>-->
+<!--                <field name="day_end"/>-->
+<!--            </xpath>-->
             <xpath expr="//button[@name='adjustment_leave']" position="attributes">
                 <attribute name="name">adjustment_leave_new</attribute>
             </xpath>

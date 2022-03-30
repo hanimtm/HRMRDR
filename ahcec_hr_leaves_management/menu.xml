@@ -2,7 +2,9 @@
 <odoo>
 
     <!-- Leave Configuration Menu -->
-<!--    <menuitem name="Configuration" action="hr_holidays.open_view_holiday_status" id="hr_holidays.menu_hr_holidays_configuration" parent="hr_holidays.menu_hr_holidays_root" sequence="120" groups="hr_holidays.group_hr_holidays_manager"/>-->
+<!--    <menuitem name="Configuration" -->
+<!--              action="hr_holidays.open_view_holiday_status" -->
+<!--              id="hr_holidays.menu_hr_holidays_configuration" parent="hr_holidays.menu_hr_holidays_root" sequence="120" groups="hr_holidays.group_hr_holidays_manager"/>-->
 
     <!-- Public Holiday Menu -->
 <!--    <menuitem action="open_public_holidays_view" id="menu_public_holidays_view" parent="hr_holidays.menu_hr_holidays_root" sequence="20" groups="hr_holidays.group_hr_holidays_manager"/>-->

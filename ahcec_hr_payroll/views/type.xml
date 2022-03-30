@@ -52,10 +52,10 @@
                 </p>
             </field>
         </record>
-<!--        <menuitem name="Salary Type"-->
-<!--                  id="menu_salary_type"-->
-<!--                  parent="hr_payroll.menu_hr_payroll_configuration"-->
-<!--                  action="action_salary_type_tree" sequence="3"/>-->
+        <menuitem name="Salary Type"
+                  id="menu_salary_type"
+                  parent="hr_work_entry_contract_enterprise.menu_hr_payroll_configuration"
+                  action="action_salary_type_tree" sequence="3"/>
 
 
     </data>

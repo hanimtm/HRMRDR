@@ -74,11 +74,11 @@
             </field>
         </record>
 
-<!--        <menuitem name="Other Salary Rule"-->
-<!--                  action="action_hr_other_salary_rule"-->
-<!--                  id="menu_hr_other_salary_rule"-->
-<!--                  parent="hr_payroll.menu_hr_payroll_configuration"-->
-<!--                  groups="hr.group_hr_manager,account.group_account_user"/>-->
+        <menuitem name="Other Salary Rule"
+                  action="action_hr_other_salary_rule"
+                  id="menu_hr_other_salary_rule"
+                  parent="hr_work_entry_contract_enterprise.menu_hr_payroll_configuration"
+                  groups="hr.group_hr_manager,account.group_account_user"/>
 
     </data>
 </odoo>
