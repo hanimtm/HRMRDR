@@ -28,7 +28,6 @@
 <!--    <act_window name="Payslip Report"-->
 <!--        res_model="company.payslip.report"-->
 <!--        src_model="hr.payslip.run"-->
-<!--        view_type="form"-->
 <!--        view_mode="form"-->
 <!--        target="new"-->
 <!--        id="action_payslip_report_view"/>-->

@@ -34,12 +34,22 @@
             <field name="res_model">wizard.payroll.history</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">form</field>
-            <field name="view_id" ref="wizard_payroll_history_form"/>
+<!--            <field name="view_id" ref="wizard_payroll_history_form"/>-->
             <field name="target">new</field>
         </record>
 
-        <menuitem id="menu_hr_payroll_report" name="Payroll Reports" parent="hr_payroll.menu_hr_payroll_root"/>
-        <menuitem action="wizard_act_payroll" id="menu_hr_payslip_run" parent="menu_hr_payroll_report"/>
+<!--        <menuitem id="menu_hr_payroll_report"-->
+<!--                  name="Payroll Reports"-->
+<!--                  parent="hr_payroll.menu_hr_payroll_root"/>-->
+
+<!--        <menuitem action="wizard_act_payroll"-->
+<!--                  name="Export"-->
+<!--                  id="menu_hr_payslip_run"-->
+<!--                  parent="menu_hr_payroll_report"/>-->
+<menuitem action="wizard_act_payroll"
+                  name="Export"
+                  id="menu_hr_payslip_run"
+                  parent="hr_work_entry_contract_enterprise.menu_hr_payroll_configuration"/>
 
 
     </data>
