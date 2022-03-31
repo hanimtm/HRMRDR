@@ -33,18 +33,6 @@ class InsuranceDetails(models.Model):
     _order = 'id desc'
     _description = 'Employee Medical Insurance'
 
-    @api.depends('employee_id')
-    def _get_employee_vals(self):
-        for insurance in self:
-            if insurance.employee_id:
-                insurance.dob = insurance.employee_id.sudo().birthday
-                insurance.gender = insurance.employee_id.sudo().gender
-                insurance.company_id = (
-                                               insurance.employee_id.company_id and insurance.employee_id.company_id.id or False) or (
-                                               insurance.env.user.company_id and insurance.env.user.company_id.id or False)
-                insurance.currency_id = insurance.company_id and insurance.company_id.currency_id and insurance.company_id.currency_id.id or False
-                insurance.member_name = insurance.employee_id.name
-
     def _add_followers(self):
         for insurance in self:
             if insurance.employee_id.user_id:
@@ -59,14 +47,14 @@ class InsuranceDetails(models.Model):
 
     name = fields.Char(string="Insurance Number", required=True, track_visibility='onchange')
     card_code = fields.Char('Card Code')
-    member_name = fields.Char('Member Name', compute=_get_employee_vals)
+    member_name = fields.Char('Member Name', compute='_get_employee_vals')
     note = fields.Text('Note')
     claim_count = fields.Integer(string='# of claims', compute=_count_claim)
     insurance_amount = fields.Float('Insurance Amount', required=True, track_visibility='onchange')
     premium_amount = fields.Float('Premium Amount / Day ', required=True, track_visibility='onchange')
     start_date = fields.Date('Start Date', required=True, default=datetime.today(), track_visibility='onchange')
     end_date = fields.Date('End Date', required=True, track_visibility='onchange')
-    dob = fields.Date('Date of Birth', compute=_get_employee_vals, store=True)
+    dob = fields.Date('Date of Birth', compute='_get_employee_vals', store=True)
     premium_type = fields.Selection([('monthly', 'Monthly'),
                                      ('quarterly', 'Quarterly'),
                                      ('half', 'Half Yearly'),
@@ -79,23 +67,37 @@ class InsuranceDetails(models.Model):
 
     class_id = fields.Many2one('employee.class', string='Class', track_visibility='onchange')
     gender = fields.Selection([('male', 'Male'),
-                               ('female', 'Female')], compute=_get_employee_vals, store=True)
+                               ('female', 'Female')], compute='_get_employee_vals', store=True)
     relation = fields.Selection([('employee', 'Employee'),
                                  ('child', 'Child'),
                                  ('spouse', 'Spouse')], track_visibility='onchange')
     employee_id = fields.Many2one('hr.employee', required=True, string='Employee', track_visibility='onchange')
     supplier_id = fields.Many2one('res.partner', required=True, string='Supplier', domain=[('supplier', '=', True)],
                                   track_visibility='onchange')
-    currency_id = fields.Many2one('res.currency', compute=_get_employee_vals, store=True)
+    currency_id = fields.Many2one('res.currency', compute='_get_employee_vals', store=True)
     responsible_id = fields.Many2one('res.users', string='Responsible', required=True,
                                      default=lambda self: self.env.uid,
                                      track_visibility='onchange')
-    company_id = fields.Many2one('res.company', string='Company', compute=_get_employee_vals, store=True,
+    company_id = fields.Many2one('res.company', string='Company', compute='_get_employee_vals', store=True,
                                  track_visibility='onchange')
     claims_ids = fields.One2many('claim.details', 'insurance_id', string='Claims')
     premium_ids = fields.One2many('insurance.premium', 'insurance_id', string='Insurance premium')
     dependent_ids = fields.One2many('insurance.employee.dependent', 'insurance_id', string='Dependents')
     is_invoice_created = fields.Boolean('Invoice Created', readonly=True)
+
+    @api.depends('employee_id')
+    def _get_employee_vals(self):
+        for insurance in self:
+            if insurance.employee_id:
+
+                insurance.dob = insurance.employee_id.sudo().birthday
+                insurance.gender = insurance.employee_id.sudo().gender
+                insurance.company_id = (
+                    insurance.employee_id.company_id and insurance.employee_id.company_id.id or False) or (
+                    insurance.env.user.company_id and insurance.env.user.company_id.id or False)
+                insurance.currency_id = insurance.company_id and insurance.company_id.currency_id and insurance.company_id.currency_id.id or False
+                # insurance.member_name = insurance.employee_id.sudo().name
+
 
     @api.constrains('insurance_amount', 'premium_amount')
     def check_premium_amount(self):
@@ -320,6 +322,7 @@ class InsurancePremium(models.Model):
     insurance_id = fields.Many2one('insurance.details', string='Insurance')
     # invoice_id = fields.Many2one('account.invoice', string="Invoice")
     move_id = fields.Many2one('account.move', string="Move ID")
+    is_invoice_created = fields.Boolean(related='insurance_id.is_invoice_created')
 
     def view_invoice_action(self):
         return {

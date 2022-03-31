@@ -8,7 +8,7 @@
                 <sheet>
                     <group>
                         <group string="Employee Details">
-                            <field name="employee_id" />
+                            <field name="employee_id"/>
                             <field name="department_id"/>
                             <field name="job_id"/>
                             <field name="passport_no"/>
@@ -26,7 +26,8 @@
                     </group>
                     <notebook>
                         <page string="GOSI">
-                            <field name="payslip_line_ids" nolabel="1" readonly="1" groups="hr_payroll.group_hr_payroll_user">
+                            <field name="payslip_line_ids" nolabel="1" readonly="1"
+                                   groups="hr_payroll.group_hr_payroll_user">
                                 <tree string="GOSI Deduction Details">
                                     <field name="date"/>
                                     <field name="payslip_id"/>
@@ -35,7 +36,8 @@
                             </field>
                         </page>
                         <page string="HADAF">
-                            <field name="hadaf_line_ids" nolabel="1" readonly="1" groups="hr_payroll.group_hr_payroll_user">
+                            <field name="hadaf_line_ids" nolabel="1" readonly="1"
+                                   groups="hr_payroll.group_hr_payroll_user">
                                 <tree>
                                     <field name="payslip_id"/>
                                     <field name="date"/>
@@ -44,8 +46,8 @@
                             </field>
                         </page>
                     </notebook>
-                 </sheet>
-             </form>
+                </sheet>
+            </form>
         </field>
     </record>
 
@@ -66,22 +68,22 @@
         </field>
     </record>
 
-<!--    <record id="hr_gosi_filter_search" model="ir.ui.view">-->
-<!--         <field name="name">hr.gosi.select.list</field>-->
-<!--         <field name="model">employee.gosi</field>-->
-<!--         <field name="arch" type="xml">-->
-<!--             <search string="Group By...">-->
-<!--&lt;!&ndash;                 <field name="employee_id"/>&ndash;&gt;-->
-<!--                 <group expand="0" >-->
-<!--                     <filter string="Type" context="{'group_by':'region_type'}"/>-->
-<!--                     <filter string="Employee" context="{'group_by':'employee_id'}"/>-->
-<!--                     <filter string="Department" context="{'group_by':'department_id'}"/>-->
-<!--                     <filter string="Job Position" context="{'group_by':'job_id'}"/>-->
-<!--                     <filter string="Nationality" context="{'group_by':'country_id'}"/>-->
-<!--                 </group>-->
-<!--             </search>-->
-<!--         </field>-->
-<!--    </record>-->
+    <record id="hr_gosi_filter_search" model="ir.ui.view">
+        <field name="name">hr.gosi.select.list</field>
+        <field name="model">employee.gosi</field>
+        <field name="arch" type="xml">
+            <search string="Group By...">
+                <field name="employee_id"/>
+                <group expand="0">
+                    <filter string="Type" name="Type" context="{'group_by':'region_type'}"/>
+                    <filter string="Employee" name="Employee" context="{'group_by':'employee_id'}"/>
+                    <filter string="Department" name="Department" context="{'group_by':'department_id'}"/>
+                    <filter string="Job Position" name="Job Position" context="{'group_by':'job_id'}"/>
+                    <filter string="Nationality" name="Nationality" context="{'group_by':'country_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
 
     <record id="action_hr_gosi_view" model="ir.actions.act_window">
         <field name="name">Employee GOSI</field>
@@ -101,5 +103,6 @@
     </record>
 
     <!-- GOSI Menu-->
-    <menuitem id="menu_hr_gosi" parent="ahcec_hr.menu_gr" action="action_hr_gosi_view" sequence="7" groups="hr.group_hr_user"/>
+    <menuitem id="menu_hr_gosi" parent="ahcec_hr.menu_gr" action="action_hr_gosi_view" sequence="7"
+              groups="hr.group_hr_user"/>
 </odoo>

@@ -10,7 +10,7 @@
     'website': 'http://www.ahcec.com',
     'category': 'HR',
     'version': '1.0',
-    'depends': ['ahcec_hr', 'documents', 'account','ahcec_hr_dependent'],
+    'depends': ['ahcec_hr', 'hr', 'documents', 'account','ahcec_hr_dependent'],
     'data': [
         'security/ir.model.access.csv',
         'security/security.xml',

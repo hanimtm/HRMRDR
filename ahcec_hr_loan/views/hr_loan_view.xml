@@ -117,10 +117,10 @@
                 <field name="state"/>
                 <group expand="0" string="Group By...">
                     <filter name="group_name" string="Description" context="{'group_by':'name'}"/>
-<!--                    <filter name="group_request" string="Request Date" icon="terp-personal" context="{'group_by':'request_date'}"/>-->
-<!--                    <filter name="group_employee" string="Employee" icon="terp-personal" context="{'group_by':'employee_id'}"/>-->
-<!--                    <filter string="Department" icon="terp-personal+" context="{'group_by':'department_id','set_visible':True}"/>-->
-<!--                    <filter string="Status" icon="terp-stock_effects-object-colorize" context="{'group_by':'state'}"/>-->
+                    <filter name="Request Date" string="Request Date" icon="terp-personal" context="{'group_by':'request_date'}"/>
+                    <filter name="group employee" string="Employee" icon="terp-personal" context="{'group_by':'employee_id'}"/>
+                    <filter string="Department" name="Department" icon="terp-personal+" context="{'group_by':'department_id','set_visible':True}"/>
+                    <filter string="Status" name="Status" icon="terp-stock_effects-object-colorize" context="{'group_by':'state'}"/>
                 </group>
             </search>
         </field>

@@ -23,27 +23,32 @@
                 <header>
                     <button name="action_confirm" string="Confirm" class="oe_highlight" type="object" states="draft"
                             groups="hr.group_hr_user"/>
-                    <button name="generate_premiums" string="Compute Board" class="oe_highlight" type="object" states="draft"
+                    <button name="generate_premiums" string="Compute Board" class="oe_highlight" type="object"
+                            states="draft"
                             groups="hr.group_hr_user"/>
                     <button name="action_done" type="object" string="Done" class="oe_highlight" states="confirmed"
                             groups="hr.group_hr_user"/>
                     <button name="create_invoice" type="object" string="Create Invoice" class="oe_highlight"
-                                        attrs="{'invisible': [('is_invoice_created','=', True),('state','=', 'confirmed')]}" groups="hr.group_hr_user"/>
+                            attrs="{'invisible': [('is_invoice_created','=', True),('state','=', 'confirmed')]}"
+                            groups="hr.group_hr_user"/>
                     <button name="action_cancelled" string="Cancel" type="object" states="draft,confirmed"
                             groups="hr.group_hr_user"/>
-                    <button name="action_set_to_draft" string="Set to draft" class="oe_highlight" type="object" states="cancelled"
+                    <button name="action_set_to_draft" string="Set to draft" class="oe_highlight" type="object"
+                            states="cancelled"
                             groups="hr.group_hr_user"/>
                     <field name="state" widget="statusbar" statusbar_visible="confirmed"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box oe_right">
-                        <button type="object" name="view_claims"  class="oe_stat_button" icon="fa-book" attrs="{'invisible':[('claim_count','=', 0)]}">
+                        <button type="object" name="view_claims" class="oe_stat_button" icon="fa-book"
+                                attrs="{'invisible':[('claim_count','=', 0)]}">
                             <field name="claim_count" widget="statinfo" string="Claims"/>
                         </button>
                     </div>
                     <div class="oe_title">
                         <h1>
-                            <field name="name" placeholder="Insurance Number" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="name" placeholder="Insurance Number"
+                                   attrs="{'readonly':[('state','!=','draft')]}"/>
                         </h1>
                     </div>
                     <group>
@@ -106,10 +111,19 @@
                                         <field name="amount"/>
                                         <field name="is_move_created"/>
                                         <field name="move_id"/>
-<!--                                        <button name="create_invoice" type="object" string="Create Invoice" class="oe_highlight"-->
-<!--                                        attrs="{'invisible': [('is_invoice_created','=', True)]}" groups="hr.group_hr_user"/>-->
-<!--                                        <button name="view_invoice_action" type="object" string="View Invoice"  attrs="{'invisible': [('is_invoice_created','=',False)]}" class="oe_stat_button" icon="fa-pencil-square-o" groups="hr.group_hr_user"/>-->
-<!--                                        <button name="print_invoice" type="object" string="Print Invoice" attrs="{'invisible': [('is_invoice_created','=',False)]}" icon="fa fa-print" groups="hr.group_hr_user"/>-->
+                                        <field name="is_invoice_created"/>
+
+<!--                                        <button name="create_invoice" type="object"-->
+<!--                                                string="Create Invoice" class="oe_highlight"-->
+<!--                                                attrs="{'invisible': [('is_invoice_created','=', True)]}"-->
+<!--                                                groups="hr.group_hr_user"/>-->
+<!--                                        <button name="view_invoice_action" type="object" string="View Invoice"-->
+<!--                                                attrs="{'invisible': [('is_invoice_created','=',False)]}"-->
+<!--                                                class="oe_stat_button" icon="fa-pencil-square-o"-->
+<!--                                                groups="hr.group_hr_user"/>-->
+<!--                                        <button name="print_invoice" type="object" string="Print Invoice"-->
+<!--                                                attrs="{'invisible': [('is_invoice_created','=',False)]}"-->
+<!--                                                groups="hr.group_hr_user"/>-->
                                     </tree>
                                 </field>
                             </group>
@@ -162,7 +176,8 @@
                     <button name="action_confirm" string="Confirm" class="oe_highlight" type="object" states="draft"/>
                     <button name="action_done" type="object" string="Done" class="oe_highlight" states="confirm"
                             groups="hr.group_hr_user"/>
-                    <button name="action_set_to_draft" string="Set to draft" class="oe_highlight" type="object" states="refuse,cancel"
+                    <button name="action_set_to_draft" string="Set to draft" class="oe_highlight" type="object"
+                            states="refuse,cancel"
                             groups="hr.group_hr_user"/>
                     <button name="action_refuse" string="Refuse" type="object" states="confirm"
                             groups="hr.group_hr_user"/>
@@ -173,24 +188,27 @@
                 <sheet>
                     <div class="oe_title">
                         <h1>
-                            <field name="name" placeholder="Claim Number" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="name" placeholder="Claim Number"
+                                   attrs="{'readonly':[('state','!=','draft')]}"/>
                         </h1>
                     </div>
                     <group>
                         <group string="Insurance Details">
                             <field name="insurance_id" attrs="{'readonly':[('state','!=','draft')]}"/>
                             <field name="responsible_id" attrs="{'readonly':[('state','!=','draft')]}"/>
-                            <field name="employee_id" attrs="{'readonly':[('state','!=','draft')]}" groups="hr.group_hr_user"/>
+                            <field name="employee_id" attrs="{'readonly':[('state','!=','draft')]}"
+                                   groups="hr.group_hr_user"/>
                         </group>
                         <group string="Claim Details">
                             <field name="date_applied" attrs="{'readonly':[('state','!=','draft')]}"/>
                             <field name="claim_amount" widget="monetary" options="{'currency_field': 'currency_id'}"
-                                   attrs="{'readonly':[('state','!=','draft')]}" />
+                                   attrs="{'readonly':[('state','!=','draft')]}"/>
                             <field name="passed_amount" widget="monetary" options="{'currency_field': 'currency_id'}"
                                    attrs="{'readonly':[('state','!=','confirm')], 'invisible':[('state','=','draft')],
                                         'required':[('state','=','confirm')]}"/>
                             <field name="currency_id" invisible="1"/>
-                            <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"
+                                   attrs="{'readonly':[('state','!=','draft')]}"/>
                         </group>
                     </group>
                     <notebook>
