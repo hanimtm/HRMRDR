@@ -105,46 +105,43 @@
         </field>
     </record>
 
-<!--    <record id="contract_amendment_filter" model="ir.ui.view">-->
-<!--        <field name="name">contract.amendment.filter</field>-->
-<!--        <field name="model">contract.amendment</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <search string="Filter">-->
-<!--                <field name="employee_id"/>-->
-<!--                <field name="hr_contract_id"/>-->
-<!--                <filter string="Draft"-->
-<!--                    domain="[('state','=',('draft'))]"-->
-<!--                    help="Visa-->
-<!--                    that has been approved" />-->
-<!--                <filter string="Confirm"-->
-<!--                    domain="[('state','=',('confirm'))]"-->
-<!--                    help="Visa that-->
-<!--                    has been waiting for approval" />-->
-<!--                <filter string="Validate"-->
-<!--                    domain="[('state','=',('validate'))]"-->
-<!--                    help="Visa that-->
-<!--                    has been refused" />-->
-<!--                <filter string="Approved"-->
-<!--                    domain="[('state','=',('approve'))]"-->
-<!--                    help="Visa that-->
-<!--                    has been refused" />-->
-<!--                <filter string="Done"-->
-<!--                    domain="[('state','=',('done'))]"-->
-<!--                    help="Visa that-->
-<!--                    has been refused" />-->
-<!--                <group expand="0" string="Group By...">-->
-<!--                    <filter string="Employee" context="{'group_by':'employee_id'}" />-->
-<!--                    <filter string="From Office" context="{'group_by':'branch_id'}" />-->
-<!--                    <filter string="From Job Position" context="{'group_by':'job_id'}" />-->
-<!--                    <filter string="From Department" context="{'group_by':'department_id'}" />-->
-<!--                    <filter string="To Office" context="{'group_by':'new_branch_id'}" />-->
-<!--                    <filter string="To Job Position" context="{'group_by':'new_job_id'}" />-->
-<!--                    <filter string="To Department" context="{'group_by':'new_department_id'}" />-->
-<!--                    <filter string="Effective Date" context="{'group_by':'effective_date'}" />-->
-<!--                </group>-->
-<!--            </search>-->
-<!--        </field>-->
-<!--    </record>-->
+    <record id="contract_amendment_filter" model="ir.ui.view">
+        <field name="name">contract.amendment.filter</field>
+        <field name="model">contract.amendment</field>
+        <field name="arch" type="xml">
+            <search string="Filter">
+                <field name="employee_id"/>
+                <field name="hr_contract_id"/>
+<!--                <field name="branch_id"/>-->
+                <filter string="Draft" name="Draft"
+                    domain="[('state','=',('draft'))]"
+                    help="Visa that has been approved" />
+                <filter string="Confirm" name="Confirm"
+                    domain="[('state','=',('confirm'))]"
+                    help="Visa that has been waiting for approval" />
+                <filter string="Validate" name="Validate"
+                    domain="[('state','=',('validate'))]"
+                    help="Visa that has been refused" />
+                <filter string="Approved" name="Approved"
+                    domain="[('state','=',('approve'))]"
+                    help="Visa that has been refused" />
+                <filter string="Done" name="Done"
+                    domain="[('state','=',('done'))]"
+                    help="Visa that
+                    has been refused" />
+                <group expand="0" string="Group By...">
+                    <filter string="Employee" name="Employee" context="{'group_by':'employee_id'}" />
+<!--                    <filter string="From Office" name="From Office" context="{'group_by':'branch_id'}" />-->
+                    <filter string="From Job Position" name="From Job Position" context="{'group_by':'job_id'}" />
+                    <filter string="From Department" name="From Department" context="{'group_by':'department_id'}" />
+<!--                    <filter string="To Office" name="To Office" context="{'group_by':'new_branch_id'}" />-->
+                    <filter string="To Job Position" name="To Job Position" context="{'group_by':'new_job_id'}" />
+                    <filter string="To Department" name="To Department" context="{'group_by':'new_department_id'}" />
+                    <filter string="Effective Date" name="Effective Date" context="{'group_by':'effective_date'}" />
+                </group>
+            </search>
+        </field>
+    </record>
 
     <record id="action_contract_amendment_view" model="ir.actions.act_window">
         <field name="name">Contract Amendment</field>
@@ -159,19 +156,19 @@
         <field name="act_window_id" ref="action_contract_amendment_view" />
     </record>
 
-<!--    <record id="action_contract_amendment_view2" model="ir.actions.act_window.view">-->
-<!--        <field eval="2" name="sequence" />-->
-<!--        <field name="view_mode">form</field>-->
-<!--        <field name="view_id" ref="contract_amendment_form_view" />-->
-<!--        <field name="act_window_id" ref="action_contract_amendment_view" />-->
-<!--    </record>-->
+    <record id="action_contract_amendment_view2" model="ir.actions.act_window.view">
+        <field eval="2" name="sequence" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="contract_amendment_form_view" />
+        <field name="act_window_id" ref="action_contract_amendment_view" />
+    </record>
 
 <!--    <record id="act_amendment_list" model="ir.actions.act_window">-->
 <!--        <field name="res_model">contract.amendment</field>-->
 <!--        <field name="src_model">hr.contract</field>-->
 <!--        <field name="name">Amendments</field>-->
 <!--        <field name="view_mode">tree,form</field>-->
-<!--        <field name="domain_force">[('employee_id.user_id', '=', user.id),('hr_contract_id','=',active_id)]</field>-->
+<!--        <field name="domain">[('employee_id.user_id', '=', user.id),('hr_contract_id','=',active_id)]</field>-->
 <!--        <field name="context">{'search_default_hr_contract_id': [active_id], 'default_hr_contract_id': active_id}</field>-->
 <!--    </record>-->
 

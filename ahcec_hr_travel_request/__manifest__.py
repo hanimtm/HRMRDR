@@ -13,7 +13,7 @@
     """,
     'author': 'AHCEC',
     'website': 'http://www.ahcec.com',
-    'depends': [
+    'depends': ['hr',
         'hr_contract',
         'ahcec_hr_contract',
         'ahcec_hr_dependent',

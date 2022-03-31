@@ -10,7 +10,7 @@
     'website': 'http://www.ahcec.com',
     'category': 'Generic Modules/Human Resources',
     'version': '1.0',
-    'depends': ['hr_payroll', 'ahcec_hr_contract', 'ahcec_hr_dependent'],
+    'depends': ['hr', 'hr_payroll', 'ahcec_hr_contract', 'ahcec_hr_dependent'],
     'data': [
         'security/ir.model.access.csv',
         # 'data/hr_payroll_data.xml',

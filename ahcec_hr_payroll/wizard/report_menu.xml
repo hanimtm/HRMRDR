@@ -29,6 +29,7 @@
                 </form>
             </field>
         </record>
+
         <record id="wizard_act_payroll" model="ir.actions.act_window">
             <field name="name">Export In Excel</field>
             <field name="res_model">wizard.payroll.history</field>

@@ -2,11 +2,12 @@
 <odoo>
 
     <!-- Contract Amendment -->
-     <menuitem id="menu_transfer_employee"
+    <menuitem id="menu_transfer_employee"
+              groups="hr.group_hr_user"
               parent="hr.menu_hr_main"
-              string="Contract Amendment"
-              name="Contract Amendment"
-              action="ahcec_hr_contract_amendment.action_contract_amendment_view"
               sequence="5"
-              groups="hr.group_hr_user"/>
+              name="Contract Amendment"
+              action="action_contract_amendment_view"
+    />
+
 </odoo>

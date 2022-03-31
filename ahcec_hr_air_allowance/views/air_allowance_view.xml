@@ -5,8 +5,8 @@
         <field name="model">city.airfare</field>
         <field name="arch" type="xml">
             <tree string="City AirFare">
-                <field name="country_id" />
-                <field name="city_id" />
+                <field name="country_id"/>
+                <field name="city_id"/>
                 <field name="adult_fare"/>
                 <field name="child_fare"/>
                 <field name="infant_fare"/>
@@ -56,18 +56,23 @@
     <record id="hr_contract_view_inherit_overtime_form1" model="ir.ui.view">
         <field name="name">hr.contract.view.inherit.overtime.form1</field>
         <field name="model">hr.contract</field>
-        <field name="inherit_id" ref="ahcec_hr_contract.hr_contract_view_inherit_overtime_form1" />
+        <field name="inherit_id" ref="ahcec_hr_contract.hr_contract_view_inherit_overtime_form1"/>
         <field name="arch" type="xml">
             <group name="other_allowance" position="inside">
                 <group name="Ticket Allowance" string="Ticket Allowance" col="2">
                     <field name="air_allowance" string="Ticket Allowance"/>
                     <field name="employee_ticket" invisible="1" attrs="{'required': [('air_allowance','=',True)]}"/>
-                    <field name="adults" attrs="{'invisible': [('air_allowance','!=',True)],'required': [('air_allowance','=',True)]}"/>
-                    <field name="children" attrs="{'invisible': [('air_allowance','!=',True)],'required': [('air_allowance','=',True)]}"/>
-<!--                    <field name="infant" attrs="{'invisible': [('air_allowance','!=',True)],'required': [('air_allowance','=',True)]}"/>-->
-                    <field name="air_destination" attrs="{'invisible': [('air_allowance','!=',True)],'required': [('air_allowance','=',True)]}"/>
-                    <field name="company_pay_adult" attrs="{'invisible': [('air_allowance','!=',True)],'required': [('air_allowance','=',True)]}"/>
-                    <field name="company_pay_children" attrs="{'invisible': [('air_allowance','!=',True)],'required': [('air_allowance','=',True)]}"/>
+                    <field name="adults"
+                           attrs="{'invisible': [('air_allowance','!=',True)],'required': [('air_allowance','=',True)]}"/>
+                    <field name="children"
+                           attrs="{'invisible': [('air_allowance','!=',True)],'required': [('air_allowance','=',True)]}"/>
+                    <!--                    <field name="infant" attrs="{'invisible': [('air_allowance','!=',True)],'required': [('air_allowance','=',True)]}"/>-->
+                    <field name="air_destination"
+                           attrs="{'invisible': [('air_allowance','!=',True)],'required': [('air_allowance','=',True)]}"/>
+                    <field name="company_pay_adult"
+                           attrs="{'invisible': [('air_allowance','!=',True)],'required': [('air_allowance','=',True)]}"/>
+                    <field name="company_pay_children"
+                           attrs="{'invisible': [('air_allowance','!=',True)],'required': [('air_allowance','=',True)]}"/>
                     <field name="reentry_cost" attrs="{'invisible': [('air_allowance','!=',True)]}"/>
                     <field name="ticket_total" attrs="{'invisible': [('air_allowance','!=',True)]}"/>
                 </group>
@@ -75,7 +80,7 @@
         </field>
     </record>
 
-    <!--<record id="hr_employee_view_inherit_air_allowance_form" model="ir.ui.view">
+    <record id="hr_employee_view_inherit_air_allowance_form" model="ir.ui.view">
         <field name="name">hr.employee.view.inherit.air.allowance.form</field>
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
@@ -84,7 +89,7 @@
                 <field name="duration_in_months"/>
             </xpath>
         </field>
-    </record>-->
+    </record>
 
     <record id="action_air_fare" model="ir.actions.act_window">
         <field name="name">Air Fare</field>
@@ -93,9 +98,9 @@
     </record>
 
     <!-- Air allowance fare Menu-->
-<!--    <menuitem id="menu_config_air_fare"-->
-<!--              string="Air Fare" name="Air Fare"-->
-<!--              action="action_air_fare" />-->
+    <menuitem id="menu_config_air_fare"
+              name="Air Fare"
+              action="action_air_fare"
+              parent="hr.menu_human_resources_configuration"/>
 
-<!--parent="hr.menu_human_resources_configuration"-->
 </odoo>
