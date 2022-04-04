@@ -1,31 +1,31 @@
 # Part of Odoo. See COPYRIGHT & LICENSE files for full copyright and licensing details.
 
 {
-    'name': "ahcec HR: GOSI Contribution",
-    'summary': """ahcec HR GOSI Contribution""",
+    'name': "ahcec HR: IQAMA Management",
+    'summary': """ahcec HR IQAMA Management """,
     'description': """
-        By this module we can calculate GOSI of employee and can deduct the amount from employee payslip.
+    IQAMA register and notify when near to expiry.
     """,
     'author': 'ahcec',
     'website': 'http://www.ahcec.com',
     'category': 'Generic Modules/Human Resources',
     'version': '1.0',
-    'depends': ['ahcec_hr','hr_payroll'],
+    'depends': ['ahcec_hr_dependent'],
     'data': [
         'security/ir.model.access.csv',
         'security/security.xml',
-        'data/hr_payroll_data.xml',
-        'views/hr_employee_gosi_view.xml',
-        'views/hr_payroll_view.xml',
+        'data/cron.xml',
+        # 'data/email_template_data.xml',
+        'views/hr_iqama_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
-        'demo/employee_gosi_demo.xml',
+        'demo/iqama_demo.xml'
     ],
     'images': [
         'static/description/main_screen.jpg'
     ],
-    "price": 250.0,
+    "price": 149.0,
     "currency": "EUR",
     'installable': True,
     'application': True,

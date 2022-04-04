@@ -88,16 +88,14 @@ class InsuranceDetails(models.Model):
     @api.depends('employee_id')
     def _get_employee_vals(self):
         for insurance in self:
-            if insurance.employee_id:
-
-                insurance.dob = insurance.employee_id.sudo().birthday
-                insurance.gender = insurance.employee_id.sudo().gender
-                insurance.company_id = (
-                    insurance.employee_id.company_id and insurance.employee_id.company_id.id or False) or (
-                    insurance.env.user.company_id and insurance.env.user.company_id.id or False)
-                insurance.currency_id = insurance.company_id and insurance.company_id.currency_id and insurance.company_id.currency_id.id or False
-                # insurance.member_name = insurance.employee_id.sudo().name
-
+            # if insurance.employee_id:
+            insurance.dob = insurance.employee_id.sudo().birthday
+            insurance.gender = insurance.employee_id.sudo().gender
+            insurance.company_id = (
+                insurance.employee_id.company_id and insurance.employee_id.company_id.id or False) or (
+                insurance.env.user.company_id and insurance.env.user.company_id.id or False)
+            insurance.currency_id = insurance.company_id and insurance.company_id.currency_id and insurance.company_id.currency_id.id or False
+            insurance.member_name = insurance.employee_id.sudo().name
 
     @api.constrains('insurance_amount', 'premium_amount')
     def check_premium_amount(self):

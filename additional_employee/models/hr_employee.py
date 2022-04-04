@@ -7,3 +7,4 @@ class HrEmployee(models.Model):
     city = fields.Char(string='City')
     # المهنة حسب الإقامة السعودي حسب التامينات
     work_iqama = fields.Char(string='Work Iqama', help="المهنة حسب الإقامة السعودي حسب التامينات")
+
