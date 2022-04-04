@@ -454,9 +454,9 @@
         <menuitem name="Exit Reason" id="menu_exit_reason" action="action_hr_exit_reason"
                   parent="hr.menu_human_resources_configuration" sequence="2"/>
 
-        <menuitem name="Employee Exit Checklists" id="hr_employees_exit_checklists"
-                  parent="hr.hr_menu_root"
-                  action="action_hr_exit_line"/>
+<!--        <menuitem name="Employee Exit Checklists" id="hr_employees_exit_checklists"-->
+<!--                  parent="hr.hr_menu_root"-->
+<!--                  action="action_hr_exit_line"/>-->
 
     </data>
 </openerp>
