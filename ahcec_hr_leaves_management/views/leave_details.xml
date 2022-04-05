@@ -72,7 +72,7 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem name="Leave Details" action="open_leave_detail_view" id="menu_leave_detail" parent="hr_holidays.menu_hr_holidays_root"
-              sequence="21" />
+<!--    <menuitem name="Leave Details" action="open_leave_detail_view" id="menu_leave_detail" parent="hr_holidays.menu_hr_holidays_root"-->
+<!--              sequence="21" />-->
 
 </odoo>
