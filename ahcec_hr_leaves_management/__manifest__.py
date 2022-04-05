@@ -25,7 +25,7 @@
         'wizard/leaves_adjust_view.xml',
         # 'wizard/leaves_allocation_view.xml',
         'views/hr_payroll_view.xml',
-        # 'views/leave_details.xml',
+        'views/leave_details.xml',
         'menu.xml',
     ],
     'installable': True,

@@ -57,7 +57,7 @@ class HrPayslip(models.Model):
 
     @api.onchange('employee_id', 'date_from', 'date_to')
     def onchange_employee(self):
-        super(HrPayslip, self).onchange_employee()
+        # super(HrPayslip, self).onchange_employee()
         res = {}
         self.bank_account_id = False
         contract_obj = self.env['hr.contract']

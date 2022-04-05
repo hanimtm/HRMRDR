@@ -68,21 +68,21 @@ class ResourceCalendar(models.Model):
     weekend_ids = fields.Many2many('res.weekdays', 'rel_weekdays_calendar', 'calendar_id', 'week_id', 'Weekends')
 
 
-# class LeaveDetail(models.Model):
-#     _name = "leave.detail"
-#
-#     name = fields.Char(string="Month")
-#     period_id = fields.Many2one('year.period', string="Month")
-#     holiday_id = fields.Many2one('hr.holidays', string="Holiday")
-#     employee_id = fields.Many2one(related='holiday_id.employee_id', string='Employee', store=True)
-#     already_taken = fields.Float(string="Already Taken")
-#     already_taken_month = fields.Float(string="Already Taken in current Month")
-#     paid_leave = fields.Float(string="Paid Leave")
-#     unpaid_leave = fields.Float(string="Unpaid Leave")
-#     leave_hours = fields.Float(string="Paid Leave Hours")
-#     total_leave_hours = fields.Float(string="Total Leave Hours")
-#     unpaid_leave_hours = fields.Float(string="Unpaid Leave Hours")
-#     total_leave = fields.Float(string="Total Leave")
+class LeaveDetail(models.Model):
+    _name = "leave.detail"
+
+    name = fields.Char(string="Month")
+    period_id = fields.Many2one('year.period', string="Month")
+    # holiday_id = fields.Many2one('hr.holidays', string="Holiday")
+    # employee_id = fields.Many2one(related='holiday_id.employee_id', string='Employee', store=True)
+    already_taken = fields.Float(string="Already Taken")
+    already_taken_month = fields.Float(string="Already Taken in current Month")
+    paid_leave = fields.Float(string="Paid Leave")
+    unpaid_leave = fields.Float(string="Unpaid Leave")
+    leave_hours = fields.Float(string="Paid Leave Hours")
+    total_leave_hours = fields.Float(string="Total Leave Hours")
+    unpaid_leave_hours = fields.Float(string="Unpaid Leave Hours")
+    total_leave = fields.Float(string="Total Leave")
 
 
 # class Holidays(models.Model):

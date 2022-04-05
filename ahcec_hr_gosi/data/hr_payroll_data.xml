@@ -101,7 +101,7 @@
 <!--            <field name="sequence" eval="5"/>-->
 <!--        </record>-->
 
-        <!-- GOSI Deduction-->
+<!--         GOSI Deduction-->
 <!--        <record id="hr_salary_rule_gosi_emp_deduction_sa" model="hr.salary.rule">-->
 <!--            <field name="name">GOSI Contribution for Saudi Employee</field>-->
 <!--            <field name="category_id" ref="hr_payroll.DED"/>-->

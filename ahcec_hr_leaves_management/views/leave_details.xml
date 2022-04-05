@@ -8,8 +8,8 @@
             <tree string="Leave Details">
                 <field name="name"/>
                 <field name="period_id" invisible="1"/>
-                <field name="holiday_id"/>
-                <field name="employee_id"/>
+<!--                <field name="holiday_id"/>-->
+<!--                <field name="employee_id"/>-->
                 <field name="already_taken"/>
                 <field name="already_taken_month"/>
                 <field name="paid_leave"/>
@@ -34,8 +34,8 @@
                 <group>
                     <field name="name"/>
                     <field name="period_id"/>
-                    <field name="holiday_id"/>
-                    <field name="employee_id"/>
+<!--                    <field name="holiday_id"/>-->
+<!--                    <field name="employee_id"/>-->
                     <field name="already_taken"/>
                     <field name="already_taken_month"/>
                 </group>
