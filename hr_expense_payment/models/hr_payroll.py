@@ -26,7 +26,7 @@ class HrPayslip(models.Model):
 
     @api.model
     def get_inputs(self, contracts, date_from, date_to):
-        res = super(HrPayslip, self).get_inputs(contracts, date_from, date_to)
+        res = super(HrPayslip, self)
         rem_amt = ded_amt = 0.0
         for contract in self.env['hr.contract'].search([('employee_id', '=', self.employee_id.id)], limit=1):
             expense_ids = self.get_expenses(contract.employee_id, date_from, date_to)

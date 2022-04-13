@@ -30,7 +30,7 @@
         <field name="priority">30</field>
         <field name="arch" type="xml">
             <xpath expr="//div[@class='oe_title']" position="replace"/>
-            <!--            <xpath expr="//field[@name='category_ids']" position="replace"/>-->
+<!--            <xpath expr="//field[@name='category_ids']" position="replace"/>-->
 
             <xpath expr="//notebook" position="before">
                 <group colspan="4">
@@ -68,7 +68,7 @@
             </xpath>
             <xpath expr="//group[@name='active_group']" position="before">
                 <group string="Employment">
-                    <field name="joining_date" required="0"/>
+                    <field name="joining_date" required="1"/>
                     <field name="date_of_leave"/>
                     <field name="total_service_year"/>
                     <field name='employee_status' required="1"/>
@@ -146,11 +146,11 @@
     </record>
 
     <!-- This Menu Item Must have a parent -->
-<!--    <menuitem-->
-<!--            id="hr.menu_hr_employee_payroll"-->
-<!--            name="Employees"-->
-<!--            parent="hr.menu_hr_root"-->
-<!--            groups="hr.group_hr_user"-->
-<!--            sequence="3"-->
-<!--            />-->
+    <!--    <menuitem-->
+    <!--            id="hr.menu_hr_employee_payroll"-->
+    <!--            name="Employees"-->
+    <!--            parent="hr.menu_hr_root"-->
+    <!--            groups="hr.group_hr_user"-->
+    <!--            sequence="3"-->
+    <!--            />-->
 </odoo>

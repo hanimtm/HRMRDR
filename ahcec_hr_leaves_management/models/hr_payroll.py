@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from datetime import time as datetime_time
 from odoo import api, models, fields, _
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
@@ -36,40 +36,43 @@ class HrPayslip(models.Model):
             nb_of_days = (day_to - day_from).days + 1
             # We will set it to 30 as our calculation is based on 30 days for your company
             month = datetime.strptime(line.date_from, DEFAULT_SERVER_DATE_FORMAT).month
-            if nb_of_days>30 or month==2 and nb_of_days==28: #If month is February or days are greater than 28 then payment days set to 30
+            if nb_of_days > 30 or month == 2 and nb_of_days == 28:  # If month is February or days are greater than 28 then payment days set to 30
                 nb_of_days = 30
             line.payment_days = nb_of_days
-
-    @api.depends('employee_id.joining_date','date_to')
+    # By Me
+    @api.depends('employee_id.joining_date', 'date_to')
     def _get_first_month_days(self):
         for line in self:
-            if not line.employee_id.joining_date:
-                raise UserError(_("Please enter 'Joining Date' of Employee first!"))
-            join_date = datetime.strptime(line.employee_id.joining_date, DEFAULT_SERVER_DATE_FORMAT)
-            day_to = datetime.strptime(line.date_to, DEFAULT_SERVER_DATE_FORMAT)
-            number_of_days = (day_to - join_date).days + 1
-            line.first_month_days = number_of_days
+            line.first_month_days = 0
+            if line.employee_id:
+                # print('a')
+                # if not line.employee_id.joining_date:
+                #     raise UserError(_("Please enter 'Joining Date' of Employee first!"))
+                join_date = datetime.strptime(str(line.employee_id.joining_date), DEFAULT_SERVER_DATE_FORMAT)
+                day_to = datetime.strptime(str(line.date_to), DEFAULT_SERVER_DATE_FORMAT)
+                number_of_days = (day_to - join_date).days + 1
+                line.first_month_days = number_of_days
 
-
-    #payment_days = fields.Float(compute='_get_payment_days', string='Payment Day(s)')
+    # payment_days = fields.Float(compute='_get_payment_days', string='Payment Day(s)')
     first_month_days = fields.Float(compute='_get_first_month_days', string='No of day(s)')
-    bank_account_id = fields.Many2one('res.partner.bank', 'Bank Account Number',help="Employee bank salary account",states={'draft': [('readonly', False)]})
+    bank_account_id = fields.Many2one('res.partner.bank', 'Bank Account Number', help="Employee bank salary account",
+                                      states={'draft': [('readonly', False)]})
 
     @api.onchange('employee_id', 'date_from', 'date_to')
     def onchange_employee(self):
-        # super(HrPayslip, self).onchange_employee()
+        super(HrPayslip, self)
         res = {}
         self.bank_account_id = False
         contract_obj = self.env['hr.contract']
         if self.employee_id:
             self.bank_account_id = self.employee_id.bank_account_id.id,
-            res.update({'domain':{'bank_account_id':[('id','=',self.employee_id.bank_account_id.id)]}})
+            res.update({'domain': {'bank_account_id': [('id', '=', self.employee_id.bank_account_id.id)]}})
         if self.contract_id:
-            result = self.get_worked_day_lines(self.contract_id , self.date_from, self.date_to)
-            worked_days_line_ids = result
+            # result = self.get_worked_day_lines(self.contract_id , self.date_from, self.date_to)
+            # worked_days_line_ids = result
             input_line_ids = self.get_inputs(self.contract_id, self.date_from, self.date_to)
-            self.worked_days_line_ids = worked_days_line_ids
-            self.input_line_ids = input_line_ids
+            # self.worked_days_line_ids = worked_days_line_ids
+            # self.input_line_ids = input_line_ids
         return res
 
     def onchange_employee_id(self, date_from, date_to, employee_id=False, contract_id=False):
@@ -77,62 +80,65 @@ class HrPayslip(models.Model):
         res['value'].update({'bank_account_id': False})
         contract_obj = self.env['hr.contract']
         if employee_id:
-            employee = self.env['hr.employee'].search([('id','=',employee_id)])
+            employee = self.env['hr.employee'].search([('id', '=', employee_id)])
             res['value'].update({
-                                 'bank_account_id': employee.bank_account_id and employee.bank_account_id.id or False,
-                                 'employee_id':employee.id
-                                 })
-            res.update({'domain':{'bank_account_id':[('id','=',employee.bank_account_id and employee.bank_account_id.id or False)]}})
+                'bank_account_id': employee.bank_account_id and employee.bank_account_id.id or False,
+                'employee_id': employee.id
+            })
+            res.update({'domain': {
+                'bank_account_id': [('id', '=', employee.bank_account_id and employee.bank_account_id.id or False)]}})
         if res['value']['contract_id']:
-            result = self.get_worked_day_lines(contract_obj.browse(res['value']['contract_id']) , date_from, date_to)
+            result = self.get_worked_day_lines(contract_obj.browse(res['value']['contract_id']), date_from, date_to)
             # Note : We have apped result on base method
             worked_days_line_ids = result
             # leave_summary = leave_result[1]
             input_line_ids = self.get_inputs(contract_obj.browse(res['value']['contract_id']), date_from, date_to)
             res['value'].update({
-                        'worked_days_line_ids': worked_days_line_ids,
-                        'input_line_ids': input_line_ids,
-                        'date_from': date_from,
-                        'date_to': date_to,
+                'worked_days_line_ids': worked_days_line_ids,
+                'input_line_ids': input_line_ids,
+                'date_from': date_from,
+                'date_to': date_to,
             })
         return res
 
-    def compute_sheet(self):
-        res = super(HrPayslip, self).compute_sheet()
-        slip_line_pool = self.env['hr.payslip.line']
-        worked_line_pool = self.env['hr.payslip.worked_days']
-        input_line_pool = self.env['hr.payslip.input']
-        sequence_obj = self.env['ir.sequence']
-        for payslip in self:
-            number = payslip.number or sequence_obj.next_by_code('salary.slip')
-            # JIMIT delete old worked data and input data
-            old_worked_lines_ids = worked_line_pool.search([('payslip_id', '=', payslip.id)])
-            if old_worked_lines_ids:
-                old_worked_lines_ids.unlink()
-            old_input_line_ids = input_line_pool.search([('payslip_id', '=', payslip.id)])
-            if old_input_line_ids:
-                old_input_line_ids.unlink()
+    # def compute_sheet(self):
+    #     res = super(HrPayslip, self).compute_sheet()
+    #     slip_line_pool = self.env['hr.payslip.line']
+    #     worked_line_pool = self.env['hr.payslip.worked_days']
+    #     input_line_pool = self.env['hr.payslip.input']
+    #     sequence_obj = self.env['ir.sequence']
+    #     for payslip in self:
+    #         number = payslip.number or sequence_obj.next_by_code('salary.slip')
+    #         # JIMIT delete old worked data and input data
+    #         old_worked_lines_ids = worked_line_pool.search([('payslip_id', '=', payslip.id)])
+    #         if old_worked_lines_ids:
+    #             old_worked_lines_ids.unlink()
+    #         old_input_line_ids = input_line_pool.search([('payslip_id', '=', payslip.id)])
+    #         if old_input_line_ids:
+    #             old_input_line_ids.unlink()
+    #
+    #         if payslip.contract_id:
+    #             # set the list of contract for which the rules have to be applied
+    #             contract_ids = payslip.contract_id
+    #         else:
+    #             # if we don't give the contract, then the rules to apply should be for all current contracts of the employee
+    #             contract_ids = payslip.get_contract(payslip.employee_id, payslip.date_from, payslip.date_to)
+    #         # jimit onchange changed
+    #         if contract_ids and type(contract_ids) is not list:
+    #             result = payslip.get_worked_day_lines(contract_ids, payslip.date_from, payslip.date_to)
+    #             # Note : We have apped result on base method
+    #             worked_days_line_ids = result
+    #             input_line_ids = payslip.get_inputs(contract_ids, payslip.date_from, payslip.date_to)
+    #             if worked_days_line_ids:
+    #                 payslip.write({'worked_days_line_ids': [(0, 0, worked_days_line_id) for worked_days_line_id in
+    #                                                         worked_days_line_ids]})
+    #             if input_line_ids:
+    #                 payslip.write({'input_line_ids': [(0, 0, input_id) for input_id in input_line_ids]})
+    #             payslip.write({'number': number})  # 'line_ids': lines
+    #     return res
 
-            if payslip.contract_id:
-                # set the list of contract for which the rules have to be applied
-                contract_ids = payslip.contract_id
-            else:
-                # if we don't give the contract, then the rules to apply should be for all current contracts of the employee
-                contract_ids = payslip.get_contract(payslip.employee_id, payslip.date_from, payslip.date_to)
-            # jimit onchange changed
-            if contract_ids and type(contract_ids) is not list:
-                result =    payslip.get_worked_day_lines(contract_ids, payslip.date_from, payslip.date_to)
-                # Note : We have apped result on base method
-                worked_days_line_ids = result
-                input_line_ids = payslip.get_inputs(contract_ids, payslip.date_from, payslip.date_to)
-                if worked_days_line_ids:
-                    payslip.write({'worked_days_line_ids': [(0, 0, worked_days_line_id) for worked_days_line_id in worked_days_line_ids]})
-                if input_line_ids:
-                    payslip.write({'input_line_ids': [(0, 0, input_id) for input_id in input_line_ids]})
-                payslip.write({'number': number})# 'line_ids': lines
-        return res  
+        # @api.model
 
-    # @api.model
     # def get_worked_day_lines(self, contracts, date_from, date_to):
     #     """
     #     @param contract: Browse record of contracts
@@ -363,7 +369,6 @@ class HrPayslip(models.Model):
     #                 res.append(paid_leave_dict)
     #             res.extend(leaves.values())
     #         return res
-
 
     def get_leaves_hours_count(self, from_datetime, to_datetime, employee_id, calendar=None):
         hours_count = 0.0

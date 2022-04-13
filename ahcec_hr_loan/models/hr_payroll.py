@@ -93,8 +93,8 @@ class HrPayslip(models.Model):
                             net_ids.write({'amount': net_record.amount + slip_line_data['amount']})
         return True
 
-    def compute_sheet(self):
-        res = super(HrPayslip, self).compute_sheet()
-        for payslip in self:
-            payslip.check_installments_to_pay()
-        return res
+    # def compute_sheet(self):
+    #     res = super(HrPayslip, self).compute_sheet()
+    #     for payslip in self:
+    #         payslip.check_installments_to_pay()
+    #     return res

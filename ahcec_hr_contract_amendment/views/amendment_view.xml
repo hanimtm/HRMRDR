@@ -216,9 +216,9 @@
         <field name="model">hr.payslip</field>
         <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//button[@name='compute_sheet']" position="attributes">
-                <attribute name="name">compute_sheet_ahcec</attribute>
-           </xpath>
+<!--            <xpath expr="//button[@name='compute_sheet']" position="attributes">-->
+<!--                <attribute name="name">compute_sheet_ahcec</attribute>-->
+<!--           </xpath>-->
             <xpath expr="//button[@name='action_payslip_done']" position="attributes">
                 <attribute name="name">action_payslip_done_new</attribute>
            </xpath>

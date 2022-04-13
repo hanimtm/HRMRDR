@@ -28,7 +28,8 @@ class EmployeeGosi(models.Model):
     birth_date = fields.Date('Date of Birth', readonly=True)
     hijri_birth_date = fields.Char('Date of Birth(Hijri)')
     country_id = fields.Many2one('res.country', 'Nationality', readonly=True)
-    company_id = fields.Many2one('res.company', string="Company", required=True, default=lambda self: self.env.user.company_id)
+    company_id = fields.Many2one('res.company', string="Company", required=True,
+                                 default=lambda self: self.env.user.company_id)
     payslip_line_ids = fields.One2many('gosi.payslip.line', 'gosi_id', string='Payslip Lines', copy=False)
     hadaf_line_ids = fields.One2many('hadaf.payslip.line', 'hadaf_id', string='HADAF Lines', copy=False)
     calculate_hadaf = fields.Boolean("Hide Password")
@@ -77,7 +78,7 @@ class EmployeeGosi(models.Model):
                            'country_id': employee.country_id.id,
                            'birth_date': employee.birthday,
                            'passport_no': employee.passport_id,
-            })
+                           })
         res = super(EmployeeGosi, self).create(values)
         return res
 
@@ -94,7 +95,7 @@ class EmployeeGosi(models.Model):
                            'department_id': employee.department_id.id,
                            'birth_date': employee.birthday,
                            'passport_no': employee.passport_id,
-                         })
+                           })
         return super(EmployeeGosi, self).write(values)
 
     @api.depends('employee_id', 'gosi_no')

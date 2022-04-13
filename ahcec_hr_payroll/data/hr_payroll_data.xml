@@ -32,18 +32,18 @@
     <!-- Basic -->
 <!--    <record id="hr_payroll_hr_rule_basic_test" model="hr.salary.rule">-->
 <!--        <field name="name">Basic</field>-->
-<!--&lt;!&ndash;        <field name="sequence" eval="104"/>&ndash;&gt;-->
+<!--        <field name="sequence" eval="104"/>-->
 <!--        <field name="code">BASIC</field>-->
 <!--&lt;!&ndash;        <field name="category_id" ref="hr_payroll.BASIC"/>&ndash;&gt;-->
-<!--&lt;!&ndash;        <field name="condition_select">none</field>&ndash;&gt;-->
-<!--&lt;!&ndash;        <field name="amount_select">code</field>&ndash;&gt;-->
-<!--&lt;!&ndash;        <field name="amount_python_compute">result = (contract.wage * payslip.payment_days) / payslip.month_days</field>&ndash;&gt;-->
+<!--        <field name="condition_select">none</field>-->
+<!--        <field name="amount_select">code</field>-->
+<!--        <field name="amount_python_compute">result = (contract.wage * payslip.payment_days) / payslip.month_days</field>-->
 <!--        <field name="amount_python_compute">result = contract.wage</field>-->
-<!--&lt;!&ndash;        <field name="struct_id" ref="structure_002"/>&ndash;&gt;-->
-<!--&lt;!&ndash;        <field name="quantity">0</field>&ndash;&gt;-->
-<!--&lt;!&ndash;        <field name="amount_percentage">0.0</field>&ndash;&gt;-->
+<!--        <field name="struct_id" ref="structure_002"/>-->
+<!--        <field name="quantity">0</field>-->
+<!--        <field name="amount_percentage">0.0</field>-->
 
-<!--        &lt;!&ndash; <field name="amount_python_compute">result = ((contract.wage/1.35)*payslip.payment_days)/30</field> &ndash;&gt;-->
+        <!-- <field name="amount_python_compute">result = ((contract.wage/1.35)*payslip.payment_days)/30</field> -->
 <!--    </record>-->
 
 
@@ -107,15 +107,17 @@
     <!--    </record>-->
 
     <!-- NET for Trainees and Contractors -->
-    <!--     <record id="hr_salary_rule_trainees_net" model="hr.salary.rule">-->
-    <!--        <field name="name">NET for trainees and contractors</field>-->
-    <!--        <field name="category_id" ref="hr_payroll.NET"/>-->
-    <!--        <field name="code">TCNET</field>-->
-    <!--        <field name="sequence" eval="300"/>-->
-    <!--        <field name="condition_select">none</field>-->
-    <!--        <field name="amount_select">code</field>-->
-    <!--        <field name="amount_python_compute">result = contract.wage</field>-->
-    <!--    </record>-->
+<!--         <record id="hr_salary_rule_trainees_net" model="hr.salary.rule">-->
+<!--            <field name="name">NET for trainees and contractors</field>-->
+<!--            <field name="category_id" ref="hr_payroll.NET"/>-->
+<!--            <field name="code">TCNET</field>-->
+<!--            <field name="sequence" eval="300"/>-->
+<!--            <field name="condition_select">none</field>-->
+<!--             <field name="amount_select">code</field>-->
+<!--&lt;!&ndash;             <field name="partner_id" ref="hr_houserent_register"/>&ndash;&gt;-->
+<!--             <field name="struct_id">1</field>-->
+<!--            <field name="amount_python_compute">result = contract.wage</field>-->
+<!--        </record>-->
 
     <!-- Salary Structure -->
     <!--     <record id="hr_payroll.structure_base" model="hr.payroll.structure">-->
@@ -135,18 +137,19 @@
     <!--        <field name="company_id" ref="base.main_company"/>-->
     <!--    </record>-->
 
-    <data noupdate="0">
+<!--    <data noupdate="0">-->
         <!-- Additional Allowance &amp; Deduction Deduction -->
-        <!--        <record id="hr_salary_rule_additional_allow" model="hr.salary.rule">-->
-        <!--           <field name="name">Additional Allowance &amp; Deduction</field>-->
-        <!--           <field name="category_id" ref="hr_payroll.ALW"/>-->
-        <!--           <field name="code">ADDITIONAL_ALW</field>-->
-        <!--           <field name="sequence" eval="9   "/>-->
-        <!--           <field name="condition_select">none</field>-->
-        <!--           <field name="amount_select">fix</field>-->
-        <!--           <field name="quantity">0.0</field>-->
-        <!--           <field name="amount_fix">0.00</field>-->
-        <!--         </record>-->
+<!--    <record id="hr_salary_rule_additional_allow_test" model="hr.salary.rule">-->
+<!--        <field name="name">Additional Allowance &amp; Deduction</field>-->
+<!--        <field name="category_id" ref="hr_payroll.ALW"/>-->
+<!--        <field name="code">ADDITIONAL_ALW_TST</field>-->
+<!--        <field name="sequence" eval="9"/>-->
+<!--        <field name="condition_select">none</field>-->
+<!--        <field name="amount_select">fix</field>-->
+<!--        <field name="quantity">0.0</field>-->
+<!--        <field name="amount_fix">0.00</field>-->
+<!--        -->
+<!--    </record>-->
         <!--        <record id="hr_salary_rule_other_additional_ded" model="hr.salary.rule">-->
         <!--           <field name="name">Additional Allowance &amp; Deduction</field>-->
         <!--           <field name="category_id" ref="hr_payroll.DED"/>-->
@@ -163,7 +166,7 @@
         <!--            <field name="rule_ids" eval="[(4,ref('hr_salary_rule_additional_allow')),(4,ref('hr_salary_rule_other_additional_ded'))]" />-->
         <!--            <field name="company_id" ref="base.main_company"/>-->
         <!--        </record>-->
-    </data>
+<!--    </data>-->
 
 
 </odoo>
